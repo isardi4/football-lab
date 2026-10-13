@@ -9,7 +9,7 @@ Fecha: 2026-10-13. Análisis independiente con fines de aprendizaje y portfolio.
 | `current` | 24 jugadores seleccionados desde las listas oficiales de septiembre 2026, cruzados con snapshot FPL del 13/10; excluye cesiones fuera del club y academia sin presencia en el grupo principal |
 | `past_team` | Club del snapshot FPL 2025/26; el agregado puede incluir otra afiliación si hubo transferencia durante la temporada |
 | `role` | Etiqueta editorial de función actual; no se deriva de una posición fina FPL |
-| `minutes` histórico | Suma de intervalos `from/to` de alineaciones; reloj global, primer tiempo limitado a 45 y segundo a 90; finales abiertos cierran en 90. Excluye descuento y ausencias temporales |
+| `minutes` histórico | Suma de intervalos `from/to` de alineaciones; reloj global, primer tiempo limitado a 45 y segundo a 90; finales abiertos cierran en 90. Excluye descuento y ausencias temporales; corta intervalos en Red Card/Second Yellow, aunque la posición quede abierta |
 | `minutes` moderno | Total reportado por FPL de la ventana 2025/26 |
 | `goals` histórico | Eventos Shot, outcome Goal; no goles en contra de rivales |
 | `goals_conceded` histórico | Goles del marcador atribuidos al arquero que completó los 90 minutos; null para jugadores de campo |
@@ -60,3 +60,15 @@ A pedido del usuario, se compara ofensiva y defensa y se muestran hasta siete ca
 - **Orden:** por valor sin redondear de la dimensión elegida, con desempate por minutos y nombre. La visualización redondea a entero. Top siete, o menos si los filtros devuelven menos.
 
 Una fuente distinta puede cambiar conteos, especialmente CBI y tackles. Los índices sirven para explorar cercanía en este conjunto de indicadores; no son una probabilidad de encaje ni una medida completa de estilo. Pases, conducción, regates, presiones y atributos FM sin contraparte histórica/moderna conservan sus faltantes. No se añade rendimiento simulado a estadísticas reales.
+
+## Detalles de partidos
+
+`match-data.js/json` contiene 76 fichas, con IDs `sb-<match_id>` para 2003/04 y `pl-<fecha ISO>` para 2025/26. El marcador y los nombres se muestran en orden local–visitante; el color de la tarjeta se determina por victoria/derrota/empate del Arsenal.
+
+Histórico: goles desde Shot/Goal y Own Goal Against, omitiendo el espejo Own Goal For para no duplicar. El gol en contra se acredita al rival del autor. Tarjetas se leen desde Foul Committed/Bad Behaviour y cambios desde Substitution. El reloj de la cronología muestra minuto:segundo del evento, sin redondearlo a un minuto editorial. Alineaciones y minutos desde intervalos posicionales, sin descuento. Tiros al arco reconstruidos con outcomes Goal, Saved y Saved to Post: es un proxy de eventos, no una medición homologada con otra fuente.
+
+Moderno: marcadores final y descanso, tiros, tiros al arco, faltas, córners, amarillas y rojas del CSV. No contiene cronología individual ni alineaciones; no se infieren desde agregados de temporada. Los detalles se presentan en una página HTML sin enviar al usuario a un JSON.
+
+Escudos: archivos oficiales actuales del servicio de imágenes de Premier League, guardados localmente. Son identificadores visuales del club, no una reconstrucción de sus versiones históricas. Procedencia y SHA-256 en `crests/sources.json`.
+
+Las posiciones históricas pueden permanecer abiertas después de una expulsión. `position_minutes` limita los intervalos a la primera Red Card/Second Yellow del jugador. Se aplica tanto a agregados como a fichas del partido; goles y conteos de acciones no cambian.

@@ -23,6 +23,8 @@ Python 3.10+ y curl, sin paquetes Python adicionales:
 ```sh
 python3 scripts/download_arsenal.py
 python3 scripts/build_dashboard_data.py
+python3 scripts/build_match_data.py
+python3 scripts/download_crests.py
 python3 -m unittest discover -s tests
 node tests/test_similarity.cjs
 node --check docs/lab.js
@@ -36,3 +38,5 @@ Abrir http://localhost:8000. También se puede abrir `docs/index.html` directame
 Análisis independiente de aprendizaje y portfolio. Datos históricos: **StatsBomb**, con logo y fuente en la página. No afiliado con Arsenal, Premier League o Sports Interactive. Las marcas pertenecen a sus propietarios. Los documentos en `docs/research/` conservan la investigación y sus cambios de dirección.
 
 El comparador y Refuerzos muestran tres índices compactos: **Overall, Ofensivo y Defensivo**. Ataque usa goles, xG y xA; defensa usa recuperaciones, tackles y CBI; los arqueros usan atajadas, goles recibidos y vallas invictas. Son proxies exploratorios entre fuentes. Overall pondera según la función original y no equivale a similitud táctica completa. Refuerzos muestra hasta siete candidatos.
+
+Partidos incluye tarjetas con fondos pastel según el resultado del Arsenal y escudos pequeños de ambos equipos. Cada enlace abre `docs/match.html`: los 38 partidos históricos tienen estadísticas, alineaciones y cronología de goles/tarjetas/cambios; los 38 de 2025/26 muestran marcador, descanso y estadísticas por equipo. Los faltantes de cronología y alineaciones modernas están explícitos. Los escudos se descargan del servicio oficial de imágenes Premier League, con hashes y URLs en `docs/crests/sources.json`.

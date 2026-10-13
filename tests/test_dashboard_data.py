@@ -21,6 +21,14 @@ class MetricTests(unittest.TestCase):
         self.assertIsNone(builder.number(''))
         self.assertEqual(builder.number('0'), 0)
 
+    def test_open_position_intervals_stop_at_dismissal(self):
+        person={'cards':[{'time':'24:23','period':1,'card_type':'Red Card'}],
+                'positions':[{'position':'Center Back','from':'00:00','from_period':1,'to':'30:00','to_period':1},
+                             {'position':'Center Forward','from':'30:00','from_period':1,'to':None,'to_period':None}]}
+        values=list(builder.position_minutes(person))
+        self.assertAlmostEqual(values[0][1],24+23/60)
+        self.assertEqual(values[1][1],0)
+
     def test_complete_season_and_known_historical_results(self):
         d = json.loads((ROOT / 'docs/arsenal-data.json').read_text())
         old = d['teams']['2003/04']

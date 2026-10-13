@@ -25,3 +25,9 @@ Se agregó un acceso visible desde el encabezado, porcentajes por pareja en el o
 ## 2026-10-13 · Overall, Ofensivo y Defensivo
 
 Se implementó profile_v2: xA se suma al ataque; recuperaciones, tackles y CBI a defensa; atajadas y goles recibidos para arqueros. Se reconstruyó CBI histórico y se atribuyeron los 26 goles recibidos al arquero que completó los 38 partidos. Se documentan proxies y pesos por función original. Top siete refuerzos, tres porcentajes compactos por candidato, pestañas en rojo Arsenal y eliminación de los destacados grandes de porcentaje del header y Refuerzos. Pruebas de ponderación, faltantes, ceros, arqueros, rankings y exposición histórica.
+
+## 2026-10-13 · Partidos con color, escudos y páginas de detalle
+
+Tarjetas rellenas de verde pastel, rojo pastel y amarillo pastel según el resultado del Arsenal. Nombres y marcador ordenados local–visitante, con dos escudos discretos. Se reemplazaron los enlaces al JSON por fichas HTML para los 76 partidos. Se añadió resumen de estadísticas, alineaciones y cronología histórica; los faltantes modernos quedan explícitos. Se verificó que todos los goles de las cronologías, incluidos los goles en contra, reconcilien con el marcador y que cada fixture tenga ficha y escudos válidos. La navegación de vuelta conserva la temporada y la pestaña Partidos.
+
+La revisión de las fichas detectó intervalos abiertos después de expulsiones. Se corrigieron los minutos en la generación histórica y las fichas, con pruebas para Campbell (24,4 minutos) y Li en el primer partido. Se regeneraron los agregados; cualquier índice afectado se recalcula con la exposición corregida.

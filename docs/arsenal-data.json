@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-13T16:08:11.469743+00:00",
+  "updated": "2026-10-13T16:39:58.445540+00:00",
   "cutoff": "2026-10-13",
   "historical": [
     {
@@ -589,7 +589,7 @@
       "source": "StatsBomb",
       "appearances": 35,
       "stats": {
-        "minutes": 3150.0,
+        "minutes": 3084.383,
         "starts": 35,
         "goals": 1,
         "assists": 1,
@@ -613,15 +613,15 @@
         "clean_sheets": null
       },
       "positions": {
-        "Left Center Back": 1976.5166666666667,
-        "Right Center Forward": 59.63333333333333,
+        "Left Center Back": 1970.5333333333333,
+        "Right Center Forward": 0,
         "Right Center Back": 1112.1166666666668,
         "Center Back": 1.7333333333333343
       },
       "matches": [
         {
           "id": 3749493,
-          "minutes": 90.0
+          "minutes": 24.38
         },
         {
           "id": 3749448,
@@ -966,7 +966,7 @@
       "source": "StatsBomb",
       "appearances": 32,
       "stats": {
-        "minutes": 2841.333,
+        "minutes": 2822.867,
         "starts": 32,
         "goals": 0,
         "assists": 3,
@@ -990,8 +990,8 @@
         "clean_sheets": null
       },
       "positions": {
-        "Left Back": 2826.2833333333333,
-        "Right Center Forward": 15.049999999999997
+        "Left Back": 2822.866666666667,
+        "Right Center Forward": 0
       },
       "matches": [
         {
@@ -1092,7 +1092,7 @@
         },
         {
           "id": 3749590,
-          "minutes": 90.0
+          "minutes": 71.53
         },
         {
           "id": 3749631,
@@ -1298,167 +1298,6 @@
       "group": "DEF"
     },
     {
-      "id": "sb-15515",
-      "name": "Patrick Vieira",
-      "original_name": "Patrick Vieira",
-      "season": "2003/04",
-      "team": "Arsenal",
-      "source": "StatsBomb",
-      "appearances": 29,
-      "stats": {
-        "minutes": 2543.633,
-        "starts": 29,
-        "goals": 3,
-        "assists": 4,
-        "xg": 3.469,
-        "xa": 3.233,
-        "shots": 20,
-        "passes": 1932,
-        "pass_completed": 1583,
-        "progressive_passes": 431,
-        "carries": 1670,
-        "dribbles": 58,
-        "pressures": 625,
-        "recoveries": 207,
-        "tackles": 98,
-        "interceptions": 23,
-        "saves": 0,
-        "clearances": 51,
-        "blocks": 69,
-        "cbi": 143,
-        "goals_conceded": null,
-        "clean_sheets": null
-      },
-      "positions": {
-        "Right Defensive Midfield": 866.7333333333333,
-        "Left Defensive Midfield": 1068.8,
-        "Right Center Midfield": 364.23333333333335,
-        "Center Defensive Midfield": 102.36666666666666,
-        "Left Center Midfield": 133.4,
-        "Right Center Forward": 8.099999999999994
-      },
-      "matches": [
-        {
-          "id": 3749493,
-          "minutes": 89.0
-        },
-        {
-          "id": 3749448,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749454,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749603,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749052,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749296,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749522,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749246,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749257,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749642,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749358,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749465,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749133,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749528,
-          "minutes": 24.63
-        },
-        {
-          "id": 3749462,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749552,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749276,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749068,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749310,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749360,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749453,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749278,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749274,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749631,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749117,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749108,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749153,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749403,
-          "minutes": 90.0
-        },
-        {
-          "id": 3749431,
-          "minutes": 90.0
-        }
-      ],
-      "position": "Left Defensive Midfield",
-      "group": "MID"
-    },
-    {
       "id": "sb-40221",
       "name": "Gilberto Silva",
       "original_name": "Gilberto Aparecido da Silva",
@@ -1630,6 +1469,167 @@
         }
       ],
       "position": "Right Defensive Midfield",
+      "group": "MID"
+    },
+    {
+      "id": "sb-15515",
+      "name": "Patrick Vieira",
+      "original_name": "Patrick Vieira",
+      "season": "2003/04",
+      "team": "Arsenal",
+      "source": "StatsBomb",
+      "appearances": 29,
+      "stats": {
+        "minutes": 2533.483,
+        "starts": 29,
+        "goals": 3,
+        "assists": 4,
+        "xg": 3.469,
+        "xa": 3.233,
+        "shots": 20,
+        "passes": 1932,
+        "pass_completed": 1583,
+        "progressive_passes": 431,
+        "carries": 1670,
+        "dribbles": 58,
+        "pressures": 625,
+        "recoveries": 207,
+        "tackles": 98,
+        "interceptions": 23,
+        "saves": 0,
+        "clearances": 51,
+        "blocks": 69,
+        "cbi": 143,
+        "goals_conceded": null,
+        "clean_sheets": null
+      },
+      "positions": {
+        "Right Defensive Midfield": 866.7333333333333,
+        "Left Defensive Midfield": 1066.75,
+        "Right Center Midfield": 364.23333333333335,
+        "Center Defensive Midfield": 102.36666666666666,
+        "Left Center Midfield": 133.4,
+        "Right Center Forward": 0
+      },
+      "matches": [
+        {
+          "id": 3749493,
+          "minutes": 89.0
+        },
+        {
+          "id": 3749448,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749454,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749603,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749052,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749296,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749522,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749246,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749257,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749642,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749358,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749465,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749133,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749528,
+          "minutes": 24.63
+        },
+        {
+          "id": 3749462,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749552,
+          "minutes": 79.85
+        },
+        {
+          "id": 3749276,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749068,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749310,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749360,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749453,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749278,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749274,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749631,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749117,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749108,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749153,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749403,
+          "minutes": 90.0
+        },
+        {
+          "id": 3749431,
+          "minutes": 90.0
+        }
+      ],
+      "position": "Left Defensive Midfield",
       "group": "MID"
     },
     {

@@ -45,6 +45,16 @@ def position_group(name):
     return 'MID'
 
 
+def position_minutes(person):
+    """Clip source position intervals at a dismissal, even if they remain open."""
+    dismissal=min((minute_clock(c['time'],c['period']) for c in person.get('cards',[])
+                   if c['card_type'] in ['Red Card','Second Yellow']),default=90.0)
+    for position in person.get('positions',[]):
+        end=min(minute_clock(position['to'],position['to_period']),dismissal)
+        start=minute_clock(position['from'],position['from_period'])
+        yield position['position'],max(0,end-start)
+
+
 def historical():
     players, fixtures = {}, []
     matches = json.loads((CACHE / 'matches.json').read_text())
@@ -68,10 +78,8 @@ def historical():
                 players[pid]['stats']['clean_sheets'] = None
             p = players[pid]
             minutes = 0
-            for position in positions:
-                length = max(0, minute_clock(position['to'], position['to_period']) -
-                             minute_clock(position['from'], position['from_period']))
-                p['positions'][position['position']] += length
+            for position, length in position_minutes(person):
+                p['positions'][position] += length
                 minutes += length
             p['stats']['minutes'] += minutes
             p['stats']['starts'] += int(any(q['start_reason'] == 'Starting XI' for q in positions))

@@ -30,6 +30,7 @@
   function tab(name) {
     document.querySelectorAll('.view').forEach(v => {v.hidden = v.id !== name; v.classList.toggle('active', v.id === name);});
     document.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+    history.replaceState(null,'','#'+name);
   }
   document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
   $('team-summary').innerHTML = Object.entries(D.teams).map(([season,t]) => `<div class="season-summary"><div class="season-name">${season}<small>${season === '2003/04' ? 'INVENCIBLES' : 'CAMPEONES'}</small></div>${[['points','Puntos'],['gf','Goles'],['ga','Recibidos'],['losses','Derrotas']].map(([k,l])=>`<div class="stat"><strong>${t[k]}</strong><small>${l}</small></div>`).join('')}</div>`).join('');
@@ -129,12 +130,21 @@
   ['recruit-group','min-minutes','recruit-sort'].forEach(id=>$(id).addEventListener('change',renderRecruit));
   function renderMatches() {
     const filter=$('match-result').value;
+    const badge=team=>`<img class="team-crest" src="${esc(window.MATCH_DATA.crests[team])}" alt="" width="18" height="18">`;
     $('match-grid').innerHTML=D.fixtures[$('match-season').value].filter(m=>filter==='all'||(m.gf>m.ga?'win':m.gf<m.ga?'loss':'draw')===filter).map(m=>{
       const result=m.gf>m.ga?'win':m.gf<m.ga?'loss':'draw';
-      return `<article class="match-card"><header><span>${esc(m.date)}</span><span>${m.home?'LOCAL':'VISITANTE'}</span></header><h3>Arsenal · ${esc(m.opponent)}</h3><div class="score ${result}">${m.gf} <span aria-hidden="true">—</span> ${m.ga}</div><small>${result==='win'?'Victoria':result==='loss'?'Derrota':'Empate'}${m.id?` · <a target="_blank" rel="noopener" href="https://github.com/hudl/open-data/blob/master/data/events/${m.id}.json">Eventos ↗</a>`:''}</small></article>`;
+      const home=m.home?'Arsenal':m.opponent,away=m.home?m.opponent:'Arsenal';
+      const hs=m.home?m.gf:m.ga,as=m.home?m.ga:m.gf;
+      const id=m.id?'sb-'+m.id:'pl-'+m.date;
+      return `<article class="match-card match-${result}"><header><span>${esc(m.date)}</span><span>ARSENAL ${m.home?'LOCAL':'VISITANTE'}</span></header><h3 class="fixture-name"><span class="team-label">${badge(home)}<span>${esc(home)}</span></span><span class="fixture-separator">—</span><span class="team-label away"><span>${esc(away)}</span>${badge(away)}</span></h3><div class="score ${result}">${hs} <span aria-hidden="true">—</span> ${as}</div><div class="match-card-bottom"><small class="${result}">${result==='win'?'Victoria':result==='loss'?'Derrota':'Empate'}</small><a class="match-detail-link" href="match.html?id=${encodeURIComponent(id)}">Detalles del partido ↗</a></div></article>`;
     }).join('')||'<p>No hay partidos con este resultado.</p>';
   }
   ['match-season','match-result'].forEach(id=>$(id).addEventListener('change',renderMatches));
   $('fm-attributes').innerHTML=Object.entries(D.fm.attributes).map(([name,n])=>`<div class="fm-attr"><span>${esc(name)}</span><div class="bar-track"><div class="bar" style="width:${n/99*100}%"></div></div><strong>${n}</strong></div>`).join('')+'<p class="small-note">Rice · muestra FM26. No participa en un score de similitud ni reemplaza métricas faltantes.</p>';
-  selectPair(10);renderSquads();$('recruit-reference').value=findOld('Thierry Henry').id;renderRecruit();renderMatches();
+  selectPair(10);renderSquads();$('recruit-reference').value=findOld('Thierry Henry').id;renderRecruit();
+  const params=new URLSearchParams(location.search);
+  if(params.get('season') in D.fixtures)$('match-season').value=params.get('season');
+  renderMatches();
+  const initialTab=location.hash.slice(1);
+  if(['compare','squads','recruit','matches','sources'].includes(initialTab))tab(initialTab);
 })();
