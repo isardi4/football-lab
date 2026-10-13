@@ -54,6 +54,17 @@
     $('role-note').innerHTML = `<strong>${esc(pair?.[5] || old.position)} · hipótesis por función</strong><br>${esc(pair?.[6] || 'Comparación exploratoria de un participante de la campaña histórica.')}${pair && findCurrent(pair[1]).id !== current.id ? '<br><strong>Seleccionaste otro candidato: la hipótesis anterior corresponde al propuesto en el once.</strong>' : ''}`;
     $('comparison-head').innerHTML = `<div class="comparison-names"><div class="old"><h3>${esc(old.name)}</h3><small>Arsenal · 2003/04 · ${fmt(old.stats.minutes)} min</small></div><div class="new"><h3>${esc(current.name)}</h3><small>${esc(modern?.team || 'Sin datos de esa ventana')} · 2025/26 · ${fmt(modern?.stats.minutes)} min</small><br><small>Actual: Arsenal · ${fmt(current.current_minutes)} min en 2026/27</small></div></div>`;
     const similarity=window.offensiveSimilarity(old,modern);
+    $('similarity-preview').innerHTML=`<a href="#compare" class="score-preview" id="score-preview-link"><span><strong>${esc(old.name)} → ${esc(current.name)}</strong><small>Similitud de producción ofensiva · ver comparación ↓</small></span><b>${similarity.score===null?'Sin %':similarity.score+'%'}</b></a>`;
+    $('score-preview-link').addEventListener('click',()=>tab('compare'));
+    document.querySelectorAll('[data-pair]').forEach(button=>{
+      const candidatePair=pairs[Number(button.dataset.pair)];
+      const candidateCurrent=findCurrent(candidatePair[1]);
+      const value=window.offensiveSimilarity(findOld(candidatePair[0]),modernById.get(candidateCurrent.past_id));
+      let badge=button.querySelector('.pitch-score');
+      if(!badge){badge=document.createElement('span');badge.className='pitch-score';button.appendChild(badge);}
+      badge.textContent=value.score===null?'Sin %':value.score+'%';
+      badge.title=value.reason||'Similitud ofensiva: goles y xG por 90; no parecido de estilo.';
+    });
     $('similarity').innerHTML=similarity.score===null ? `<div class="similarity-empty"><strong>Similitud de producción ofensiva · sin porcentaje</strong><p>${esc(similarity.reason)}</p></div>` : `<div class="similarity-summary"><div class="similarity-number"><output aria-label="Similitud de producción ofensiva">${similarity.score}<span>%</span></output></div><div><p class="eyebrow">SIMILITUD DE PRODUCCIÓN OFENSIVA</p><p>Goles y xG por 90 minutos · índice exploratorio</p><small>100% significa producción igual en estas métricas; no mismo estilo, calidad ni probabilidad de encaje.</small></div></div><div class="similarity-components">${similarity.components.map(c=>`<div><span>${esc(c.label)}</span><strong>${c.score===null?'Sin señal':fmt(c.score,0)+'%'}</strong></div>`).join('')}</div><details class="score-method"><summary>Cómo se obtiene este porcentaje</summary><p>Para cada métrica: menor valor por 90 ÷ mayor valor por 90 × 100. El índice promedia los dos resultados con igual peso. Una producción doble da 50% en esa dimensión; valores iguales dan 100%. Un cero compartido no aporta señal y se excluye del promedio.</p><p>Se requieren 900 minutos por jugador y ambas métricas presentes. El xG proviene de modelos diferentes; el resultado es orientativo. No incluye asistencias fantasy, defensa, pases, conducción ni atributos FM. Versión: offensive_v1.</p></details>`;
     const per90 = $('per90').checked;
     const rows = [['goals','Goles','Producción comparable'],['xg','xG','Modelos diferentes'],['xa','xA','Modelos / cálculo diferentes'],['assists','Asistencias','Históricas vs fantasy'],['recoveries','Recuperaciones','Definiciones sin armonizar'],['tackles','Tackles','Definiciones sin armonizar'],['saves','Atajadas','Definiciones sin armonizar']];
@@ -88,12 +99,25 @@
   function renderRecruit() {
     const old=D.historical.find(p=>p.id===$('recruit-reference').value),target=rate(old,'goals',true),sort=$('recruit-sort').value;
     const candidates=D.external.filter(p=>p.group===$('recruit-group').value&&p.stats.minutes>=Number($('min-minutes').value));
-    candidates.sort((a,b)=>sort==='gap'?Math.abs(rate(a,'goals',true)-target)-Math.abs(rate(b,'goals',true)-target)||b.stats.minutes-a.stats.minutes:sort==='minutes'?b.stats.minutes-a.stats.minutes:(rate(b,sort,true)??-Infinity)-(rate(a,sort,true)??-Infinity));
+    const scores=new Map(candidates.map(p=>[p.id,window.offensiveSimilarity(old,p)]));
+    const bySimilarity=(a,b)=>(scores.get(b.id).score??-1)-(scores.get(a.id).score??-1)||b.stats.minutes-a.stats.minutes||a.name.localeCompare(b.name);
+    const best=[...candidates].filter(p=>scores.get(p.id).score!==null).sort(bySimilarity)[0];
+    $('recruit-best').innerHTML=best?`<div class="recruit-best-card"><div><p class="eyebrow">MAYOR SIMILITUD OFENSIVA EN ESTOS FILTROS</p><h3>${esc(best.name)} <span>→ ${esc(old.name)}</span></h3><p>${esc(best.team)} · 2025/26 · ${fmt(best.stats.minutes)} minutos</p><small>Goles/90: ${fmt(scores.get(best.id).components[0].score,0)}% · xG/90: ${scores.get(best.id).components[1].score===null?'Sin señal':fmt(scores.get(best.id).components[1].score,0)+'%'}. No incluye estilo ni viabilidad de fichaje.</small></div><strong>${scores.get(best.id).score}<span>%</span></strong></div>`:`<div class="notice"><strong>No hay porcentaje calculable para estos filtros.</strong>${esc(candidates.length?scores.get(candidates[0].id).reason:'No hay candidatos con estos minutos y categoría.')}</div>`;
+    candidates.sort((a,b)=>sort==='similarity'?bySimilarity(a,b):sort==='gap'?Math.abs(rate(a,'goals',true)-target)-Math.abs(rate(b,'goals',true)-target)||b.stats.minutes-a.stats.minutes:sort==='minutes'?b.stats.minutes-a.stats.minutes:(rate(b,sort,true)??-Infinity)-(rate(a,sort,true)??-Infinity));
     const historicalGroup=old.group==='FWD'?'FWD':old.group==='MID'?'MID':old.group;
-    $('recruit-note').innerHTML=`<strong>${esc(old.name)}: ${fmt(target,2)} goles/90 en 2003/04.</strong> Mostramos hasta 20 de ${candidates.length} candidatos del grupo seleccionado.${sort==='gap'?' El orden mide cercanía únicamente en goles/90; para defensores y arqueros discrimina poco y no mide su función.':' El orden usa una estadística moderna; no estima parecido con el histórico.'}${historicalGroup!==$('recruit-group').value?' El grupo elegido difiere de la posición histórica: revisá la compatibilidad.':''}`;
-    $('recruit-body').innerHTML=candidates.slice(0,20).map(p=>`<tr><td><strong>${esc(p.name)}</strong><small>${esc(p.position)}</small></td><td>${esc(p.team)}</td><td>${esc(p.current_team_fpl||'Sin confirmar')}</td><td>${fmt(p.stats.minutes)}</td>${['goals','xg','xa','tackles'].map(k=>`<td>${fmt(rate(p,k,true),2)}</td>`).join('')}</tr>`).join('')||'<tr><td colspan="8">Sin candidatos para estos filtros.</td></tr>';
+    $('recruit-note').innerHTML=`<strong>Porcentaje respecto de ${esc(old.name)} · ${fmt(target,2)} goles/90 en 2003/04.</strong> Mostramos hasta 20 de ${candidates.length} candidatos del grupo seleccionado.${sort==='similarity'?' Ordenados de mayor a menor similitud ofensiva: promedio de cercanía en goles/90 y xG/90, con igual peso. No mide parecido completo ni probabilidad de encaje.':sort==='gap'?' Ordenados sólo por cercanía en goles/90. La columna de porcentaje sigue usando goles y xG.':' Ordenados por la estadística elegida; el mayor porcentaje puede aparecer en otra fila.'}${historicalGroup!==$('recruit-group').value?' El grupo elegido difiere de la posición histórica: revisá la compatibilidad.':''}`;
+    $('recruit-body').innerHTML=candidates.slice(0,20).map(p=>{
+      const s=scores.get(p.id);
+      const details=s.score===null?s.reason:s.components.map(c=>`${c.label}: ${c.score===null?'Sin señal':fmt(c.score,0)+'%'}`).join(' · ');
+      return `<tr data-candidate="${esc(p.id)}" data-score="${s.score===null?'':s.score}"><td class="score-cell"><strong class="score-pill ${s.score===null?'unavailable':''}" title="${esc(details)}">${s.score===null?'—':s.score+'%'}</strong><small>${s.score===null?'No evaluable':'ofensiva'}</small></td><td><strong>${esc(p.name)}</strong><small>${esc(p.position)}</small></td><td>${esc(p.team)}</td><td>${esc(p.current_team_fpl||'Sin confirmar')}</td><td>${fmt(p.stats.minutes)}</td>${['goals','xg','xa','tackles'].map(k=>`<td>${fmt(rate(p,k,true),2)}</td>`).join('')}</tr>`;
+    }).join('')||'<tr><td colspan="9">Sin candidatos para estos filtros.</td></tr>';
   }
-  ['recruit-reference','recruit-group','min-minutes','recruit-sort'].forEach(id=>$(id).addEventListener('change',renderRecruit));
+  $('recruit-reference').addEventListener('change',()=>{
+    const old=D.historical.find(p=>p.id===$('recruit-reference').value);
+    $('recruit-group').value=old.group;
+    renderRecruit();
+  });
+  ['recruit-group','min-minutes','recruit-sort'].forEach(id=>$(id).addEventListener('change',renderRecruit));
   function renderMatches() {
     const filter=$('match-result').value;
     $('match-grid').innerHTML=D.fixtures[$('match-season').value].filter(m=>filter==='all'||(m.gf>m.ga?'win':m.gf<m.ga?'loss':'draw')===filter).map(m=>{
