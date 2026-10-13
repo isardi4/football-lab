@@ -1,10 +1,10 @@
 # Football Analytics Lab
 
-> **North Star document / Project plan**  
-> Estado: `V1 exploratoria / publicación GitHub Pages`  
-> Última revisión: `2026-10-13`  
-> Objetivo inicial: **MVP de portfolio/aprendizaje con datos gratuitos**  
-> Caso de uso inicial: **Invincibles 2003/04 vs Arsenal actual: similitud por función y posibles refuerzos**  
+> **North Star document / Project plan**
+> Estado: `V1 exploratoria / publicación GitHub Pages`
+> Última revisión: `2026-10-13`
+> Objetivo inicial: **MVP de portfolio/aprendizaje con datos gratuitos**
+> Caso de uso inicial: **Invincibles 2003/04 vs Arsenal actual: similitud por función y posibles refuerzos**
 > Objetivo del documento: mantener alineado el desarrollo, las decisiones de arquitectura y el uso de Codex con el problema real que queremos resolver.
 
 ---
