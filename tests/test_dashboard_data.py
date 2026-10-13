@@ -51,5 +51,25 @@ class MetricTests(unittest.TestCase):
         codes={p['code'] for p in d['current']}
         self.assertTrue(all(p['code'] not in codes for p in d['external']))
 
+    def test_defensive_aggregate_and_goalkeeper_exposure(self):
+        d = json.loads((ROOT / 'docs/arsenal-data.json').read_text())
+        for player in d['historical']:
+            st=player['stats']
+            self.assertEqual(st['cbi'],st['clearances']+st['blocks']+st['interceptions'])
+            if player['group']!='GK':
+                self.assertIsNone(st['goals_conceded'])
+        keeper=next(p for p in d['historical'] if p['name']=='Jens Lehmann')
+        self.assertEqual(len(keeper['matches']),38)
+        self.assertTrue(all(m['minutes']==90 for m in keeper['matches']))
+        self.assertEqual(keeper['stats']['goals_conceded'],d['teams']['2003/04']['ga'])
+        self.assertEqual(keeper['stats']['clean_sheets'],sum(m['ga']==0 for m in d['fixtures']['2003/04']))
+        evidence=json.loads((ROOT/'docs/research/arsenal_2526_access_check.json').read_text())
+        for item in evidence['player_samples']:
+            original=item['season_aggregate']
+            p=next(p for p in d['modern'] if p['code']==original['element_code'])
+            self.assertEqual(p['stats']['cbi'],float(original['clearances_blocks_interceptions']))
+            self.assertEqual(p['stats']['goals_conceded'],float(original['goals_conceded']))
+            self.assertEqual(p['stats']['clean_sheets'],float(original['clean_sheets']))
+
 
 if __name__ == '__main__': unittest.main()

@@ -11,7 +11,8 @@ CACHE = ROOT / 'data/source_checks/arsenal_dashboard'
 OUT = ROOT / 'docs'
 METRICS = ['minutes', 'starts', 'goals', 'assists', 'xg', 'xa', 'shots', 'passes',
            'pass_completed', 'progressive_passes', 'carries', 'dribbles',
-           'pressures', 'recoveries', 'tackles', 'interceptions', 'saves']
+           'pressures', 'recoveries', 'tackles', 'interceptions', 'saves',
+           'clearances', 'blocks', 'cbi', 'goals_conceded', 'clean_sheets']
 ALIASES = {20015: 'Jens Lehmann', 40222: 'Lauren', 38412: 'Kolo Touré',
            15637: 'Sol Campbell', 12529: 'Ashley Cole', 15515: 'Patrick Vieira',
            40221: 'Gilberto Silva', 15754: 'Freddie Ljungberg', 19312: 'Robert Pirès',
@@ -63,6 +64,8 @@ def historical():
                                 'team': 'Arsenal', 'source': 'StatsBomb', 'appearances': 0,
                                 'stats': dict.fromkeys(METRICS, 0), 'positions': Counter(),
                                 'matches': []}
+                players[pid]['stats']['goals_conceded'] = None
+                players[pid]['stats']['clean_sheets'] = None
             p = players[pid]
             minutes = 0
             for position in positions:
@@ -103,23 +106,35 @@ def historical():
             if kind == 'Ball Recovery': st['recoveries'] += int(not e.get('ball_recovery', {}).get('recovery_failure', False))
             if kind == 'Duel' and e.get('duel', {}).get('type', {}).get('name') == 'Tackle': st['tackles'] += 1
             if kind == 'Interception': st['interceptions'] += 1
+            if kind in ['Clearance', 'Block', 'Interception']:
+                st['cbi'] += 1
+            if kind == 'Clearance': st['clearances'] += 1
+            if kind == 'Block': st['blocks'] += 1
             if kind == 'Goal Keeper' and e.get('goalkeeper', {}).get('type', {}).get('name') in ['Shot Saved', 'Penalty Saved', 'Shot Saved to Post']:
                 st['saves'] += 1
         home = match['home_team']['home_team_name'] == 'Arsenal'
         gf, ga = (match['home_score'], match['away_score']) if home else (match['away_score'], match['home_score'])
+        for pid in active:
+            p = players[pid]
+            # Full-match goalkeeper exposure can be reconciled with the scoreboard.
+            # Do not attribute a team's goals conceded to substitutes or outfield players.
+            if p['matches'][-1]['minutes'] == 90 and all(q == 'Goalkeeper' for q in p['positions']):
+                p['stats']['goals_conceded'] = (p['stats']['goals_conceded'] or 0) + ga
+                p['stats']['clean_sheets'] = (p['stats']['clean_sheets'] or 0) + int(ga == 0)
         fixtures.append({'date': match['match_date'], 'opponent': match['away_team']['away_team_name'] if home else match['home_team']['home_team_name'], 'home': home, 'gf': gf, 'ga': ga, 'id': mid})
     for p in players.values():
         p['positions'] = dict(p['positions'])
         p['position'] = max(p['positions'], key=p['positions'].get)
         p['group'] = position_group(p['position'])
-        p['stats'] = {k: round(v, 3) for k, v in p['stats'].items()}
+        p['stats'] = {k: round(v, 3) if v is not None else None for k, v in p['stats'].items()}
     return sorted(players.values(), key=lambda p: -p['stats']['minutes']), sorted(fixtures, key=lambda f: f['date'])
 
 
 def modern_row(row, teams):
     mapping = {'minutes': 'minutes', 'starts': 'starts', 'goals': 'goals_scored',
                'assists': 'assists', 'xg': 'expected_goals', 'xa': 'expected_assists',
-               'recoveries': 'recoveries', 'tackles': 'tackles', 'saves': 'saves'}
+               'recoveries': 'recoveries', 'tackles': 'tackles', 'saves': 'saves',
+               'goals_conceded': 'goals_conceded', 'clean_sheets': 'clean_sheets'}
     stats = dict.fromkeys(METRICS, None)
     for target, source in mapping.items(): stats[target] = number(row.get(source))
     stats['cbi'] = number(row.get('clearances_blocks_interceptions'))

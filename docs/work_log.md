@@ -21,3 +21,7 @@ A pedido del usuario, se agregó offensive_v1: porcentaje explícito de cercaní
 ## 2026-10-13 · Porcentajes visibles en comparación y Refuerzos
 
 Se agregó un acceso visible desde el encabezado, porcentajes por pareja en el once y una columna sticky de similitud en Refuerzos. La lista externa usa el mismo offensive_v1, con orden predeterminado descendente y una ficha de la mejor coincidencia dentro de los filtros. El cambio de referente ajusta automáticamente la categoría; faltantes quedan no evaluables. Se versionaron las URLs de CSS/JS para evitar cargar una mezcla de archivos antiguos desde caché.
+
+## 2026-10-13 · Overall, Ofensivo y Defensivo
+
+Se implementó profile_v2: xA se suma al ataque; recuperaciones, tackles y CBI a defensa; atajadas y goles recibidos para arqueros. Se reconstruyó CBI histórico y se atribuyeron los 26 goles recibidos al arquero que completó los 38 partidos. Se documentan proxies y pesos por función original. Top siete refuerzos, tres porcentajes compactos por candidato, pestañas en rojo Arsenal y eliminación de los destacados grandes de porcentaje del header y Refuerzos. Pruebas de ponderación, faltantes, ceros, arqueros, rankings y exposición histórica.

@@ -35,4 +35,4 @@ Abrir http://localhost:8000. También se puede abrir `docs/index.html` directame
 
 Análisis independiente de aprendizaje y portfolio. Datos históricos: **StatsBomb**, con logo y fuente en la página. No afiliado con Arsenal, Premier League o Sports Interactive. Las marcas pertenecen a sus propietarios. Los documentos en `docs/research/` conservan la investigación y sus cambios de dirección.
 
-El comparador incluye un porcentaje exploratorio de **similitud de producción ofensiva** (goles/90 y xG/90). No equivale a parecido de estilo y no se calcula para arqueros, defensores o muestras pequeñas; ver el diccionario.
+El comparador y Refuerzos muestran tres índices compactos: **Overall, Ofensivo y Defensivo**. Ataque usa goles, xG y xA; defensa usa recuperaciones, tackles y CBI; los arqueros usan atajadas, goles recibidos y vallas invictas. Son proxies exploratorios entre fuentes. Overall pondera según la función original y no equivale a similitud táctica completa. Refuerzos muestra hasta siete candidatos.
