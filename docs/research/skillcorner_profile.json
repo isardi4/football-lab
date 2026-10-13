@@ -1,0 +1,1538 @@
+{
+  "key": [
+    "competition_id",
+    "season_id",
+    "player_id",
+    "team_id",
+    "position_group"
+  ],
+  "minimum_performances_hypothesis": 5,
+  "tables": {
+    "physical": {
+      "sha256": "50e7d2cb5d08b1c53a726153e45468b9c0d398c2bfca6734270f65e45deb1a48",
+      "rows": 406,
+      "players": 268,
+      "teams": {
+        "Perth Glory Football Club": 41,
+        "Melbourne Victory Football Club": 27,
+        "Macarthur FC": 35,
+        "Sydney Football Club": 34,
+        "Auckland FC": 22,
+        "Adelaide United Football Club": 28,
+        "Western Sydney Wanderers FC": 25,
+        "Wellington Phoenix FC": 38,
+        "Melbourne City FC": 33,
+        "Central Coast Mariners Football Club": 32,
+        "Western United": 22,
+        "Newcastle United Jets FC": 28,
+        "Brisbane Roar FC": 41
+      },
+      "positions": {
+        "Center Forward": 74,
+        "Full Back": 74,
+        "Central Defender": 69,
+        "Midfield": 92,
+        "Wide Attacker": 97
+      },
+      "rows_with_at_least_5_performances": 210,
+      "positions_with_at_least_5_performances": {
+        "Center Forward": 33,
+        "Full Back": 47,
+        "Central Defender": 44,
+        "Midfield": 47,
+        "Wide Attacker": 39
+      },
+      "fields": {
+        "player_name": {
+          "missing": 0
+        },
+        "player_short_name": {
+          "missing": 0
+        },
+        "player_id": {
+          "missing": 0,
+          "min": 211.0,
+          "median": 133676.5,
+          "max": 1002177.0
+        },
+        "player_birthdate": {
+          "missing": 1
+        },
+        "team_name": {
+          "missing": 0
+        },
+        "team_id": {
+          "missing": 0,
+          "min": 866.0,
+          "median": 1802.0,
+          "max": 4177.0
+        },
+        "competition_name": {
+          "missing": 0
+        },
+        "competition_id": {
+          "missing": 0,
+          "min": 61.0,
+          "median": 61.0,
+          "max": 61.0
+        },
+        "season_name": {
+          "missing": 0
+        },
+        "season_id": {
+          "missing": 0,
+          "min": 95.0,
+          "median": 95.0,
+          "max": 95.0
+        },
+        "position_group": {
+          "missing": 0
+        },
+        "minutes_full_all": {
+          "missing": 0,
+          "min": 60.35,
+          "median": 89.225,
+          "max": 104.58
+        },
+        "minutes_full_tip": {
+          "missing": 0,
+          "min": 10.43,
+          "median": 24.3,
+          "max": 39.42
+        },
+        "minutes_full_otip": {
+          "missing": 0,
+          "min": 12.48,
+          "median": 24.37,
+          "max": 37.33
+        },
+        "count_match": {
+          "missing": 0,
+          "min": 1.0,
+          "median": 5.0,
+          "max": 29.0
+        },
+        "count_match_failed": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.0
+        },
+        "total_distance_full_all": {
+          "missing": 0,
+          "min": 6746.0,
+          "median": 10152.43,
+          "max": 13173.0
+        },
+        "total_metersperminute_full_all": {
+          "missing": 0,
+          "min": 96.13,
+          "median": 116.305,
+          "max": 140.61
+        },
+        "running_distance_full_all": {
+          "missing": 0,
+          "min": 795.0,
+          "median": 1423.25,
+          "max": 2702.0
+        },
+        "hsr_distance_full_all": {
+          "missing": 0,
+          "min": 247.75,
+          "median": 543.27,
+          "max": 916.0
+        },
+        "hsr_count_full_all": {
+          "missing": 0,
+          "min": 21.6,
+          "median": 49.29,
+          "max": 90.0
+        },
+        "sprint_distance_full_all": {
+          "missing": 0,
+          "min": 8.0,
+          "median": 144.0,
+          "max": 418.0
+        },
+        "sprint_count_full_all": {
+          "missing": 0,
+          "min": 1.0,
+          "median": 8.245,
+          "max": 22.0
+        },
+        "hi_distance_full_all": {
+          "missing": 0,
+          "min": 289.25,
+          "median": 689.25,
+          "max": 1293.0
+        },
+        "hi_count_full_all": {
+          "missing": 0,
+          "min": 23.88,
+          "median": 57.75,
+          "max": 107.0
+        },
+        "medaccel_count_full_all": {
+          "missing": 0,
+          "min": 67.0,
+          "median": 104.475,
+          "max": 161.0
+        },
+        "highaccel_count_full_all": {
+          "missing": 0,
+          "min": 2.0,
+          "median": 5.33,
+          "max": 13.0
+        },
+        "meddecel_count_full_all": {
+          "missing": 0,
+          "min": 53.0,
+          "median": 87.485,
+          "max": 125.0
+        },
+        "highdecel_count_full_all": {
+          "missing": 0,
+          "min": 4.0,
+          "median": 13.25,
+          "max": 39.0
+        },
+        "explacceltohsr_count_full_all": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 3.815,
+          "max": 12.0
+        },
+        "timetohsr_top3": {
+          "missing": 147,
+          "min": 0.57,
+          "median": 0.71,
+          "max": 1.02
+        },
+        "explacceltosprint_count_full_all": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 1.0,
+          "max": 7.0
+        },
+        "timetosprint_top3": {
+          "missing": 217,
+          "min": 1.1,
+          "median": 1.43,
+          "max": 1.97
+        },
+        "psv99": {
+          "missing": 0,
+          "min": 24.3,
+          "median": 28.26,
+          "max": 32.3
+        },
+        "psv99_top5": {
+          "missing": 0,
+          "min": 24.3,
+          "median": 28.8,
+          "max": 32.74
+        },
+        "total_distance_full_tip": {
+          "missing": 0,
+          "min": 1637.0,
+          "median": 3420.785,
+          "max": 5322.0
+        },
+        "total_metersperminute_full_tip": {
+          "missing": 0,
+          "min": 112.82,
+          "median": 141.555,
+          "max": 182.53
+        },
+        "running_distance_full_tip": {
+          "missing": 0,
+          "min": 217.5,
+          "median": 566.25,
+          "max": 1092.0
+        },
+        "hsr_distance_full_tip": {
+          "missing": 0,
+          "min": 36.5,
+          "median": 222.25,
+          "max": 462.0
+        },
+        "hsr_count_full_tip": {
+          "missing": 0,
+          "min": 3.36,
+          "median": 20.535,
+          "max": 48.0
+        },
+        "sprint_distance_full_tip": {
+          "missing": 0,
+          "min": 1.0,
+          "median": 55.5,
+          "max": 274.0
+        },
+        "sprint_count_full_tip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 3.0,
+          "max": 14.0
+        },
+        "hi_distance_full_tip": {
+          "missing": 0,
+          "min": 42.67,
+          "median": 283.7,
+          "max": 658.0
+        },
+        "hi_count_full_tip": {
+          "missing": 0,
+          "min": 3.4,
+          "median": 24.0,
+          "max": 62.0
+        },
+        "medaccel_count_full_tip": {
+          "missing": 0,
+          "min": 15.0,
+          "median": 35.0,
+          "max": 61.0
+        },
+        "highaccel_count_full_tip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 1.8,
+          "max": 5.0
+        },
+        "meddecel_count_full_tip": {
+          "missing": 0,
+          "min": 12.0,
+          "median": 25.625,
+          "max": 48.0
+        },
+        "highdecel_count_full_tip": {
+          "missing": 0,
+          "min": 1.0,
+          "median": 3.5,
+          "max": 9.0
+        },
+        "explacceltohsr_count_full_tip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 1.0,
+          "max": 5.0
+        },
+        "explacceltosprint_count_full_tip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 0.14,
+          "max": 3.0
+        },
+        "total_distance_full_otip": {
+          "missing": 0,
+          "min": 1845.0,
+          "median": 3721.0,
+          "max": 6394.0
+        },
+        "total_metersperminute_full_otip": {
+          "missing": 0,
+          "min": 122.13,
+          "median": 153.17000000000002,
+          "max": 202.82
+        },
+        "running_distance_full_otip": {
+          "missing": 0,
+          "min": 278.0,
+          "median": 707.8050000000001,
+          "max": 1604.0
+        },
+        "hsr_distance_full_otip": {
+          "missing": 0,
+          "min": 76.0,
+          "median": 286.5,
+          "max": 600.0
+        },
+        "hsr_count_full_otip": {
+          "missing": 0,
+          "min": 9.0,
+          "median": 25.28,
+          "max": 49.0
+        },
+        "sprint_distance_full_otip": {
+          "missing": 0,
+          "min": 1.0,
+          "median": 67.47,
+          "max": 206.5
+        },
+        "sprint_count_full_otip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 3.5,
+          "max": 11.0
+        },
+        "hi_distance_full_otip": {
+          "missing": 0,
+          "min": 87.0,
+          "median": 360.5,
+          "max": 694.0
+        },
+        "hi_count_full_otip": {
+          "missing": 0,
+          "min": 10.0,
+          "median": 28.9,
+          "max": 56.0
+        },
+        "medaccel_count_full_otip": {
+          "missing": 0,
+          "min": 16.0,
+          "median": 41.0,
+          "max": 67.0
+        },
+        "highaccel_count_full_otip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 1.89,
+          "max": 5.0
+        },
+        "meddecel_count_full_otip": {
+          "missing": 0,
+          "min": 14.67,
+          "median": 30.775,
+          "max": 56.0
+        },
+        "highdecel_count_full_otip": {
+          "missing": 0,
+          "min": 1.33,
+          "median": 4.390000000000001,
+          "max": 20.0
+        },
+        "explacceltohsr_count_full_otip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 1.0,
+          "max": 3.5
+        },
+        "explacceltosprint_count_full_otip": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 0.185,
+          "max": 2.0
+        }
+      }
+    },
+    "passing": {
+      "sha256": "f9513abc29704613331f7647d7ec2e33137eb7145bdaae10ba3798ddd3a29c90",
+      "rows": 407,
+      "players": 284,
+      "teams": {
+        "Perth Glory Football Club": 37,
+        "Melbourne Victory Football Club": 27,
+        "Macarthur FC": 35,
+        "Sydney Football Club": 36,
+        "Auckland FC": 23,
+        "Adelaide United Football Club": 31,
+        "Western Sydney Wanderers FC": 27,
+        "Wellington Phoenix FC": 38,
+        "Melbourne City FC": 34,
+        "Central Coast Mariners Football Club": 28,
+        "Western United": 21,
+        "Newcastle United Jets FC": 27,
+        "Brisbane Roar FC": 43
+      },
+      "positions": {
+        "Center Forward": 69,
+        "Full Back": 70,
+        "Central Defender": 66,
+        "Midfield": 92,
+        "Wide Attacker": 88,
+        "Goalkeeper": 22
+      },
+      "rows_with_at_least_5_performances": 192,
+      "positions_with_at_least_5_performances": {
+        "Center Forward": 26,
+        "Central Defender": 38,
+        "Goalkeeper": 19,
+        "Full Back": 37,
+        "Midfield": 41,
+        "Wide Attacker": 31
+      },
+      "fields": {
+        "competition_edition_id": {
+          "missing": 0,
+          "min": 870.0,
+          "median": 870.0,
+          "max": 870.0
+        },
+        "competition_id": {
+          "missing": 0,
+          "min": 61.0,
+          "median": 61.0,
+          "max": 61.0
+        },
+        "competition_name": {
+          "missing": 0
+        },
+        "season_id": {
+          "missing": 0,
+          "min": 95.0,
+          "median": 95.0,
+          "max": 95.0
+        },
+        "season_name": {
+          "missing": 0
+        },
+        "player_id": {
+          "missing": 0,
+          "min": 211.0,
+          "median": 104563.0,
+          "max": 1002177.0
+        },
+        "player_name": {
+          "missing": 0
+        },
+        "player_short_name": {
+          "missing": 0
+        },
+        "player_birthdate": {
+          "missing": 0
+        },
+        "team_id": {
+          "missing": 0,
+          "min": 866.0,
+          "median": 1802.0,
+          "max": 4177.0
+        },
+        "team_name": {
+          "missing": 0
+        },
+        "position_group": {
+          "missing": 0
+        },
+        "minutes": {
+          "missing": 2,
+          "min": 60.35,
+          "median": 91.4,
+          "max": 106.3
+        },
+        "minutes_tip": {
+          "missing": 2,
+          "min": 10.53,
+          "median": 24.69,
+          "max": 39.7
+        },
+        "minutes_otip": {
+          "missing": 2,
+          "min": 11.89,
+          "median": 24.76,
+          "max": 37.05
+        },
+        "performance_count": {
+          "missing": 0,
+          "min": 1.0,
+          "median": 4.0,
+          "max": 26.0
+        },
+        "performance_included_count": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 4.0,
+          "max": 25.0
+        },
+        "performance_failed_count": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.0
+        },
+        "passopportunity_count_total": {
+          "missing": 2,
+          "min": 15.0,
+          "median": 386.0,
+          "max": 4217.0
+        },
+        "passopportunity_count_p30tip": {
+          "missing": 2,
+          "min": 19.01,
+          "median": 122.39,
+          "max": 286.68
+        },
+        "pass_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.94
+        },
+        "pass_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.91,
+          "max": 9.24
+        },
+        "pass_count_attempted_total": {
+          "missing": 2,
+          "min": 6.0,
+          "median": 118.0,
+          "max": 1391.0
+        },
+        "pass_count_attempted_p30tip": {
+          "missing": 2,
+          "min": 7.38,
+          "median": 39.47,
+          "max": 100.94
+        },
+        "pass_count_completed_p30tip": {
+          "missing": 2,
+          "min": 4.78,
+          "median": 32.33,
+          "max": 91.57
+        },
+        "pass_pct_completed": {
+          "missing": 2,
+          "min": 42.86,
+          "median": 82.61,
+          "max": 100.0
+        },
+        "pass_avgxpass_attempted": {
+          "missing": 2,
+          "min": 58.14,
+          "median": 83.54,
+          "max": 96.4
+        },
+        "pass_avgdistance": {
+          "missing": 2,
+          "min": 7.77,
+          "median": 14.96,
+          "max": 26.65
+        },
+        "pass_count_longrange_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.75,
+          "max": 9.37
+        },
+        "pass_count_onetouch_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 9.82,
+          "max": 26.23
+        },
+        "pass_count_quickpass_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 7.61,
+          "max": 24.78
+        },
+        "pass_count_onetouch_dangerous_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.66,
+          "max": 7.39
+        },
+        "pass_count_quickpass_dangerous_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.39,
+          "max": 4.62
+        },
+        "passopportunity_count_linebreak_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 17.92,
+          "max": 96.25
+        },
+        "pass_count_linebreak_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 4.41,
+          "max": 24.97
+        },
+        "pass_count_linebreak_completed_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 3.08,
+          "max": 20.29
+        },
+        "passopportunity_count_torun_p30tip": {
+          "missing": 2,
+          "min": 3.16,
+          "median": 24.34,
+          "max": 61.94
+        },
+        "pass_count_torun_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 8.54,
+          "max": 26.03
+        },
+        "pass_count_torun_completed_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 6.56,
+          "max": 19.52
+        },
+        "pass_pct_torun_completed": {
+          "missing": 3,
+          "min": 0.0,
+          "median": 78.95,
+          "max": 100.0
+        },
+        "pass_avgxpass_torun_attempted": {
+          "missing": 3,
+          "min": 42.76,
+          "median": 75.39,
+          "max": 99.66
+        },
+        "pass_count_torun_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.78,
+          "max": 5.83
+        },
+        "pass_count_torun_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.69
+        },
+        "passopportunity_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 15.74,
+          "max": 61.84
+        },
+        "pass_count_dangerous_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 3.83,
+          "max": 16.79
+        },
+        "pass_pct_dangerous_completed": {
+          "missing": 42,
+          "min": 0.0,
+          "median": 55.1,
+          "max": 100.0
+        },
+        "pass_count_dangerous_completed_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.97,
+          "max": 9.43
+        },
+        "pass_count_difficultpass_attempted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 6.56,
+          "max": 20.77
+        }
+      }
+    },
+    "obr": {
+      "sha256": "1b5aeddceb4c120085357ca03d7ccb67c8aaeb3a0e9cf9439c96da2aa8b29736",
+      "rows": 407,
+      "players": 284,
+      "teams": {
+        "Perth Glory Football Club": 37,
+        "Melbourne Victory Football Club": 27,
+        "Macarthur FC": 35,
+        "Sydney Football Club": 36,
+        "Auckland FC": 23,
+        "Adelaide United Football Club": 31,
+        "Western Sydney Wanderers FC": 27,
+        "Wellington Phoenix FC": 38,
+        "Melbourne City FC": 34,
+        "Central Coast Mariners Football Club": 28,
+        "Western United": 21,
+        "Newcastle United Jets FC": 27,
+        "Brisbane Roar FC": 43
+      },
+      "positions": {
+        "Center Forward": 69,
+        "Full Back": 70,
+        "Central Defender": 66,
+        "Midfield": 92,
+        "Wide Attacker": 88,
+        "Goalkeeper": 22
+      },
+      "rows_with_at_least_5_performances": 192,
+      "positions_with_at_least_5_performances": {
+        "Center Forward": 26,
+        "Central Defender": 38,
+        "Goalkeeper": 19,
+        "Full Back": 37,
+        "Midfield": 41,
+        "Wide Attacker": 31
+      },
+      "fields": {
+        "competition_edition_id": {
+          "missing": 0,
+          "min": 870.0,
+          "median": 870.0,
+          "max": 870.0
+        },
+        "competition_id": {
+          "missing": 0,
+          "min": 61.0,
+          "median": 61.0,
+          "max": 61.0
+        },
+        "competition_name": {
+          "missing": 0
+        },
+        "season_id": {
+          "missing": 0,
+          "min": 95.0,
+          "median": 95.0,
+          "max": 95.0
+        },
+        "season_name": {
+          "missing": 0
+        },
+        "player_id": {
+          "missing": 0,
+          "min": 211.0,
+          "median": 104563.0,
+          "max": 1002177.0
+        },
+        "player_name": {
+          "missing": 0
+        },
+        "player_short_name": {
+          "missing": 0
+        },
+        "player_birthdate": {
+          "missing": 0
+        },
+        "team_id": {
+          "missing": 0,
+          "min": 866.0,
+          "median": 1802.0,
+          "max": 4177.0
+        },
+        "team_name": {
+          "missing": 0
+        },
+        "position_group": {
+          "missing": 0
+        },
+        "minutes": {
+          "missing": 2,
+          "min": 60.35,
+          "median": 91.4,
+          "max": 106.3
+        },
+        "minutes_tip": {
+          "missing": 2,
+          "min": 10.53,
+          "median": 24.69,
+          "max": 39.7
+        },
+        "minutes_otip": {
+          "missing": 2,
+          "min": 11.89,
+          "median": 24.76,
+          "max": 37.05
+        },
+        "performance_count": {
+          "missing": 0,
+          "min": 1.0,
+          "median": 4.0,
+          "max": 26.0
+        },
+        "performance_included_count": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 4.0,
+          "max": 25.0
+        },
+        "performance_failed_count": {
+          "missing": 0,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.0
+        },
+        "offballrun_count_total": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 62.0,
+          "max": 768.0
+        },
+        "offballrun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 29.11,
+          "max": 78.05
+        },
+        "behindrun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.92,
+          "max": 23.02
+        },
+        "comingshortrun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.54,
+          "max": 23.7
+        },
+        "crossreceiverrun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.11,
+          "max": 21.55
+        },
+        "droppingoffrun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.22,
+          "max": 16.67
+        },
+        "overlaprun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.23,
+          "max": 8.48
+        },
+        "pullinghalfspacerun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.3,
+          "max": 15.23
+        },
+        "pullingwiderun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.41,
+          "max": 9.31
+        },
+        "aheadoftheballrun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 8.3,
+          "max": 35.4
+        },
+        "supportrun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 4.3,
+          "max": 24.03
+        },
+        "underlaprun_count_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.23,
+          "max": 8.75
+        },
+        "offballrun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.66,
+          "max": 6.93
+        },
+        "behindrun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.65
+        },
+        "comingshortrun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.73
+        },
+        "crossreceiverrun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.31
+        },
+        "droppingoffrun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.46
+        },
+        "overlaprun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.83
+        },
+        "pullinghalfspacerun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.39
+        },
+        "pullingwiderun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.31
+        },
+        "aheadoftheballrun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.05
+        },
+        "supportrun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.77
+        },
+        "underlaprun_count_shotwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.63
+        },
+        "offballrun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.46
+        },
+        "behindrun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.4
+        },
+        "comingshortrun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.63
+        },
+        "crossreceiverrun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.46
+        },
+        "droppingoffrun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.38
+        },
+        "overlaprun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.88
+        },
+        "pullinghalfspacerun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.0
+        },
+        "pullingwiderun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.31
+        },
+        "aheadoftheballrun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.39
+        },
+        "supportrun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.38
+        },
+        "underlaprun_count_goalwithin10s_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.09
+        },
+        "offballrun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 9.58,
+          "max": 28.2
+        },
+        "behindrun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.27,
+          "max": 11.56
+        },
+        "comingshortrun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.56,
+          "max": 7.47
+        },
+        "crossreceiverrun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.19,
+          "max": 6.94
+        },
+        "droppingoffrun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.46,
+          "max": 6.25
+        },
+        "overlaprun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.69
+        },
+        "pullinghalfspacerun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 5.7
+        },
+        "pullingwiderun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.39,
+          "max": 7.87
+        },
+        "aheadoftheballrun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 2.63,
+          "max": 21.52
+        },
+        "supportrun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.16,
+          "max": 11.7
+        },
+        "underlaprun_count_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.92
+        },
+        "offballrun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 7.26,
+          "max": 21.52
+        },
+        "behindrun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 7.3
+        },
+        "comingshortrun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.47,
+          "max": 6.89
+        },
+        "crossreceiverrun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 4.37
+        },
+        "droppingoffrun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.42,
+          "max": 6.25
+        },
+        "overlaprun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.17
+        },
+        "pullinghalfspacerun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.26
+        },
+        "pullingwiderun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.38,
+          "max": 7.87
+        },
+        "aheadoftheballrun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.82,
+          "max": 16.14
+        },
+        "supportrun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.89,
+          "max": 11.7
+        },
+        "underlaprun_count_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.73
+        },
+        "offballrun_avgdistance": {
+          "missing": 8,
+          "min": 3.8,
+          "median": 12.93,
+          "max": 22.49
+        },
+        "behindrun_avgdistance": {
+          "missing": 127,
+          "min": 3.24,
+          "median": 15.77,
+          "max": 67.61
+        },
+        "comingshortrun_avgdistance": {
+          "missing": 65,
+          "min": 2.6,
+          "median": 8.965,
+          "max": 20.74
+        },
+        "crossreceiverrun_avgdistance": {
+          "missing": 100,
+          "min": 2.71,
+          "median": 17.52,
+          "max": 47.4
+        },
+        "droppingoffrun_avgdistance": {
+          "missing": 102,
+          "min": 2.66,
+          "median": 9.64,
+          "max": 30.12
+        },
+        "overlaprun_avgdistance": {
+          "missing": 183,
+          "min": 3.62,
+          "median": 20.134999999999998,
+          "max": 69.4
+        },
+        "pullinghalfspacerun_avgdistance": {
+          "missing": 172,
+          "min": 2.58,
+          "median": 10.06,
+          "max": 33.38
+        },
+        "pullingwiderun_avgdistance": {
+          "missing": 95,
+          "min": 2.82,
+          "median": 11.915,
+          "max": 44.66
+        },
+        "aheadoftheballrun_avgdistance": {
+          "missing": 52,
+          "min": 2.56,
+          "median": 12.76,
+          "max": 42.22
+        },
+        "supportrun_avgdistance": {
+          "missing": 36,
+          "min": 2.72,
+          "median": 13.15,
+          "max": 33.52
+        },
+        "underlaprun_avgdistance": {
+          "missing": 177,
+          "min": 3.52,
+          "median": 16.005,
+          "max": 50.76
+        },
+        "offballrun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 6.09,
+          "max": 30.37
+        },
+        "behindrun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.38,
+          "max": 12.78
+        },
+        "comingshortrun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.83
+        },
+        "crossreceiverrun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.24,
+          "max": 7.6
+        },
+        "droppingoffrun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.43
+        },
+        "overlaprun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 5.27
+        },
+        "pullinghalfspacerun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.81
+        },
+        "pullingwiderun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 2.74
+        },
+        "aheadoftheballrun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.87,
+          "max": 13.02
+        },
+        "supportrun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.63,
+          "max": 8.58
+        },
+        "underlaprun_count_abovehsr_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 4.38
+        },
+        "offballrun_count_penaltyarea_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 2.36,
+          "max": 21.55
+        },
+        "offballrun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 5.99,
+          "max": 34.67
+        },
+        "behindrun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.52,
+          "max": 15.35
+        },
+        "comingshortrun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.19
+        },
+        "crossreceiverrun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.02,
+          "max": 20.28
+        },
+        "droppingoffrun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.47
+        },
+        "overlaprun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.44
+        },
+        "pullinghalfspacerun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.54
+        },
+        "pullingwiderun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.72
+        },
+        "aheadoftheballrun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.73,
+          "max": 13.86
+        },
+        "supportrun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.91,
+          "max": 7.54
+        },
+        "underlaprun_count_dangerous_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 5.83
+        },
+        "offballrun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.7,
+          "max": 16.18
+        },
+        "behindrun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 6.98
+        },
+        "comingshortrun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.63
+        },
+        "crossreceiverrun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.16,
+          "max": 6.94
+        },
+        "droppingoffrun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.47
+        },
+        "overlaprun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.85
+        },
+        "pullinghalfspacerun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.93
+        },
+        "pullingwiderun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.46
+        },
+        "aheadoftheballrun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.31,
+          "max": 6.08
+        },
+        "supportrun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.9
+        },
+        "underlaprun_count_dangerous_targeted_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.46
+        },
+        "offballrun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 1.07,
+          "max": 8.55
+        },
+        "behindrun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.92
+        },
+        "comingshortrun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.63
+        },
+        "crossreceiverrun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 4.37
+        },
+        "droppingoffrun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.12
+        },
+        "overlaprun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 1.85
+        },
+        "pullinghalfspacerun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.93
+        },
+        "pullingwiderun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.46
+        },
+        "aheadoftheballrun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.15,
+          "max": 4.86
+        },
+        "supportrun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3.9
+        },
+        "underlaprun_count_dangerous_received_p30tip": {
+          "missing": 2,
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.88
+        }
+      }
+    }
+  },
+  "join": {
+    "union_rows": 428,
+    "all_three_rows": 385,
+    "passing_obr_symmetric_difference": 0,
+    "identity_conflicts": [],
+    "reliable_rows_by_position": {
+      "Full Back": 37,
+      "Midfield": 41,
+      "Central Defender": 38,
+      "Center Forward": 26,
+      "Wide Attacker": 31
+    },
+    "passing_only_rows": 22,
+    "physical_only_rows": 21,
+    "shared_physical_passing_rows": 385
+  }
+}
