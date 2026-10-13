@@ -37,3 +37,7 @@ StatsBomb Open Data y FPL no son mediciones idénticas. Las parejas propuestas e
 Fuentes: [StatsBomb Open Data](https://github.com/hudl/open-data), [FPL](https://fantasy.premierleague.com), [archivo vaastav](https://github.com/vaastav/Fantasy-Premier-League), [Football-Data.co.uk](https://www.football-data.co.uk), [planteles oficiales](https://www.premierleague.com/en/news/4706139/see-all-the-202627-premier-league-squad-lists), [FMInside](https://fminside.net/players/7-fm-26/28106491-declan-rice).
 
 Los JSON de eventos, alineaciones y dumps originales permanecen en cache local ignorado. La web contiene agregados calculados y procedencia. La atribución y el logo StatsBomb aparecen en la página.
+
+## Índice exploratorio offensive_v1
+
+La comparación muestra similitud de producción ofensiva, no de estilo global: `100 × min(a,b)/max(a,b)` para goles/90 y xG/90; media de dimensiones con igual peso. Ceros compartidos no aportan señal y no se incluyen. Requiere ambas métricas disponibles, valores no negativos, al menos 900 minutos en cada ventana y jugadores de categorías MID/FWD. Para arqueros/defensores queda no evaluable: estas métricas no describen su función. El xG de ambas fuentes tiene modelos distintos, por lo que este índice es orientativo y no validado como medida táctica. No incluye defensa, asistencias fantasy, FM ni métricas históricas sin equivalente moderno. Es independiente del interruptor de totales/per-90.

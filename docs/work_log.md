@@ -13,3 +13,7 @@
 - Publicación solicitada por el usuario: commit, push y GitHub Pages.
 
 Pendiente: estadísticas modernas de pases/progresión, atributos FM de cobertura completa, homologación por campo, revisión futbolística de parejas y viabilidad económica de candidatos. Ninguno se presenta como resuelto en la página.
+
+## 2026-10-13 · Porcentaje de producción ofensiva
+
+A pedido del usuario, se agregó offensive_v1: porcentaje explícito de cercanía en goles/90 y xG/90 con pesos iguales, mínimo de minutos, tratamiento de faltantes/ceros y exclusión de arqueros/defensores. No afirma similitud táctica ni probabilidad de encaje. Se aclaró la sección de acciones disponibles sólo en 2003/04. Se prueban simetría, normalización por minutos, valores iguales, faltantes, ceros y exclusiones por posición.

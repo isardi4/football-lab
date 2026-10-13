@@ -1,0 +1,16 @@
+const assert = require('node:assert/strict');
+const {offensiveSimilarity:score}=require('../docs/similarity.js');
+const p=(goals,xg,minutes=900,group='FWD')=>({group,stats:{goals,xg,minutes}});
+assert.equal(score(p(10,8),p(10,8)).score,100);
+assert.equal(score(p(10,8),p(20,16)).score,50);
+assert.equal(score(p(20,16),p(10,8)).score,50);
+assert.equal(score(p(10,8,900),p(20,16,1800)).score,100);
+assert.equal(score(p(0,0),p(0,0)).score,null);
+assert.equal(score(p(0,8),p(0,4)).score,50);
+assert.equal(score(p(10,8),p(0,0)).score,0);
+assert.equal(score(p(10,8),p(10,8,899)).score,null);
+assert.equal(score(p(10,8),p(10,null)).score,null);
+assert.equal(score(p(10,8),p(10,8,900,'DEF')).score,null);
+assert.equal(score(p(0,0,900,'GK'),p(0,0,900,'GK')).score,null);
+assert.equal(score(p(-1,8),p(10,8)).score,null);
+console.log('Similarity: equal rates, symmetry, missing data, zeroes, minutes and role checks passed.');

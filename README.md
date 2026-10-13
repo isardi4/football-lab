@@ -24,6 +24,7 @@ Python 3.10+ y curl, sin paquetes Python adicionales:
 python3 scripts/download_arsenal.py
 python3 scripts/build_dashboard_data.py
 python3 -m unittest discover -s tests
+node tests/test_similarity.cjs
 node --check docs/lab.js
 python3 -m http.server 8000 --directory docs
 ```
@@ -33,3 +34,5 @@ Abrir http://localhost:8000. También se puede abrir `docs/index.html` directame
 ## Atribución
 
 Análisis independiente de aprendizaje y portfolio. Datos históricos: **StatsBomb**, con logo y fuente en la página. No afiliado con Arsenal, Premier League o Sports Interactive. Las marcas pertenecen a sus propietarios. Los documentos en `docs/research/` conservan la investigación y sus cambios de dirección.
+
+El comparador incluye un porcentaje exploratorio de **similitud de producción ofensiva** (goles/90 y xG/90). No equivale a parecido de estilo y no se calcula para arqueros, defensores o muestras pequeñas; ver el diccionario.
