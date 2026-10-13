@@ -36,3 +36,8 @@ La revisión de las fichas detectó intervalos abiertos después de expulsiones.
 ## 2026-10-13 · Posiciones compatibles y retiro de Football Manager
 
 Se retiró la sección Football Manager y su muestra de los datos descargables y del generador. Comparar limita el selector a grupos compatibles; el buscador de refuerzos fija automáticamente el grupo original y conserva hasta siete resultados. El modelo también rechaza grupos incompatibles. Se conserva la hipótesis editorial Bergkamp–mediapunta del once actual. Entrar desde Plantel elige un referente compatible. Validación: pruebas del modelo, doce pruebas de datos y navegación en navegador.
+
+
+## 2026-10-13 · Página bilingüe
+
+Inglés por defecto en el HTML y selector English/Español arriba a la derecha del dashboard y de los detalles de partidos. La elección se conserva en localStorage; si el almacenamiento no está disponible, el selector sigue funcionando en la página. Se traducen texto estático, contenido generado, indicadores, explicaciones, posiciones, tooltips, etiquetas accesibles y eventos. Los números siguen el formato de cada idioma. Cambiar de idioma conserva jugadores, búsquedas y filtros. El diccionario descargable sigue en español y se indica en el enlace inglés. Pruebas: datos, similitud, regresiones de idioma y navegador en escritorio/móvil, con navegación y persistencia.

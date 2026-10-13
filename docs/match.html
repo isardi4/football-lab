@@ -1,16 +1,17 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Detalle del partido: marcador, estadísticas, alineaciones y cronología de eventos disponibles.">
-  <title>Detalle del partido · Football Lab</title>
-  <link rel="stylesheet" href="lab.css?v=20261013-5">
-  <script defer src="match-data.js?v=20261013-5"></script><script defer src="match.js?v=20261013-5"></script>
+  <meta name="description" content="Match details: score, statistics, lineups and a timeline of available events.">
+  <title>Match details · Football Lab</title>
+  <link rel="stylesheet" href="lab.css?v=20261013-7">
+  <script defer src="translations.js?v=20261013-7"></script><script defer src="i18n.js?v=20261013-7"></script>
+  <script defer src="match-data.js?v=20261013-7"></script><script defer src="match.js?v=20261013-7"></script>
 </head>
 <body class="match-page">
-<a class="skip" href="#main">Ir al contenido</a>
-<header class="masthead"><a href="./" class="brand"><span class="brand-mark">FL<span>↗</span></span><span>FOOTBALL LAB<small>ARSENAL COLLECTION / 001</small></span></a><a id="match-back" href="index.html#matches">← Volver a Partidos</a></header>
-<main id="main"><section id="match-hero" class="match-hero" aria-live="polite"></section><section id="match-stat-section"><div class="section-heading"><div><p class="eyebrow">EL PARTIDO EN NÚMEROS</p><h2>Estadísticas de ambos equipos.</h2></div><p id="match-stat-caption"></p></div><div id="match-stats" class="match-stats"></div></section><section class="match-timeline-section"><div class="section-heading"><div><p class="eyebrow">LOS MOMENTOS DEL PARTIDO</p><h2>Cronología.</h2></div><label id="timeline-filter-label">Mostrar<select id="timeline-filter"><option value="all">Todos los eventos clave</option><option value="goal">Goles</option><option value="cards">Tarjetas</option><option value="substitution">Cambios</option></select></label></div><div id="match-timeline"></div></section><section class="match-lineup-section"><div class="section-heading"><div><p class="eyebrow">QUIÉNES JUGARON</p><h2>Alineaciones y participación.</h2></div><p>Minutos regulares reconstruidos; el tiempo de descuento no se suma.</p></div><div id="match-lineups" class="match-lineups"></div></section><div id="match-source" class="small-note match-source"></div></main>
-<footer><span>FOOTBALL LAB / ARSENAL COLLECTION</span><p>Datos históricos: StatsBomb. Escudos del servicio de imágenes de Premier League; las marcas pertenecen a sus clubes.</p><img class="sb-logo" src="statsbomb-logo.png" alt="StatsBomb"></footer>
-<noscript><p class="notice">Activá JavaScript para ver los detalles del partido.</p></noscript>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead"><a href="./" class="brand"><span class="brand-mark">FL<span>↗</span></span><span>FOOTBALL LAB<small>ARSENAL COLLECTION / 001</small></span></a><div class="header-actions"><a id="match-back" href="index.html#matches">← Back to Matches</a><label class="language-picker" data-no-translate><span class="sr-only">Language / Idioma</span><select id="language-select" aria-label="Language / Idioma"><option value="en" lang="en">English</option><option value="es" lang="es">Español</option></select></label></div></header>
+<main id="main"><section id="match-hero" class="match-hero" aria-live="polite"></section><section id="match-stat-section"><div class="section-heading"><div><p class="eyebrow">THE MATCH IN NUMBERS</p><h2>Both teams’ statistics.</h2></div><p id="match-stat-caption"></p></div><div id="match-stats" class="match-stats"></div></section><section class="match-timeline-section"><div class="section-heading"><div><p class="eyebrow">THE MATCH MOMENTS</p><h2>Timeline.</h2></div><label id="timeline-filter-label">Show<select id="timeline-filter"><option value="all">All key events</option><option value="goal">Goals</option><option value="cards">Cards</option><option value="substitution">Substitutions</option></select></label></div><div id="match-timeline"></div></section><section class="match-lineup-section"><div class="section-heading"><div><p class="eyebrow">WHO PLAYED</p><h2>Lineups and appearances.</h2></div><p>Reconstructed regular-time minutes; stoppage time is excluded.</p></div><div id="match-lineups" class="match-lineups"></div></section><div id="match-source" class="small-note match-source"></div></main>
+<footer><span>FOOTBALL LAB / ARSENAL COLLECTION</span><p>Historical data: StatsBomb. Crests from the Premier League image service; trademarks belong to their clubs.</p><img class="sb-logo" src="statsbomb-logo.png" alt="StatsBomb"></footer>
+<noscript><p class="notice">Enable JavaScript to view match details.</p></noscript>
 </body></html>

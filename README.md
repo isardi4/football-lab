@@ -8,7 +8,7 @@
 
 Comparación interactiva de los Invincibles 2003/04, el rendimiento del Arsenal campeón 2025/26 y el plantel actual 2026/27. Incluye perfiles por jugador, propuestas de equivalentes por función, planteles, partidos y un buscador exploratorio de refuerzos.
 
-La página es estática, está en `docs/` y se publica con GitHub Pages. No necesita servidor de aplicación, credenciales ni llamadas a APIs desde el navegador. Los datos son un snapshot y no se actualizan en vivo.
+La página es estática, está en `docs/` y se publica con GitHub Pages. No necesita servidor de aplicación, credenciales ni llamadas a APIs desde el navegador. Los datos son un snapshot y no se actualizan en vivo. La web abre en inglés por defecto; el selector de la esquina superior derecha permite cambiar a español y recuerda la elección al navegar.
 
 ### Qué incluye
 
@@ -42,6 +42,7 @@ python3 scripts/build_match_data.py
 python3 scripts/download_crests.py
 python3 -m unittest discover -s tests
 node tests/test_similarity.cjs
+node tests/test_i18n.cjs
 node --check docs/lab.js
 python3 -m http.server 8000 --directory docs
 ```
@@ -58,7 +59,7 @@ Proyecto independiente de aprendizaje y portfolio. Los datos históricos son de 
 
 An interactive comparison of the 2003/04 Invincibles, Arsenal’s title-winning 2025/26 performances, and the current 2026/27 squad. It includes player profiles, proposed counterparts by role, squad lists, match details, and an exploratory recruitment browser.
 
-The static website lives in `docs/` and is published through GitHub Pages. It requires no application server, credentials, or browser-side API calls. The data is a snapshot and does not update live.
+The static website lives in `docs/` and is published through GitHub Pages. It requires no application server, credentials, or browser-side API calls. The data is a snapshot and does not update live. The website opens in English by default; the selector in the upper-right corner switches to Spanish and remembers the choice while navigating.
 
 ### Features
 
@@ -92,6 +93,7 @@ python3 scripts/build_match_data.py
 python3 scripts/download_crests.py
 python3 -m unittest discover -s tests
 node tests/test_similarity.cjs
+node tests/test_i18n.cjs
 node --check docs/lab.js
 python3 -m http.server 8000 --directory docs
 ```

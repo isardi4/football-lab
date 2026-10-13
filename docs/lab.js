@@ -3,7 +3,7 @@
   const D = window.ARSENAL_DATA;
   const $ = id => document.getElementById(id);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const fmt = (n, digits = 0) => n === null || n === undefined || !Number.isFinite(n) ? '—' : new Intl.NumberFormat('es-AR', {maximumFractionDigits: digits, minimumFractionDigits: digits}).format(n);
+  const fmt = (n, digits = 0) => n === null || n === undefined || !Number.isFinite(n) ? '—' : new Intl.NumberFormat(window.FootballI18n.locale, {maximumFractionDigits: digits, minimumFractionDigits: digits}).format(n);
   const rate = (p, key, per90) => {
     const n = p?.stats?.[key];
     if (n === null || n === undefined || (per90 && !p.stats.minutes)) return null;
@@ -64,7 +64,7 @@
     const pairIndex = pairs.findIndex(p => p[0] === old.name);
     const pair = pairs[pairIndex];
     document.querySelectorAll('[data-pair]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.pair) === pairIndex)));
-    $('role-note').innerHTML = `<strong>${esc(pair?.[5] || old.position)} · hipótesis por función</strong><br>${esc(pair?.[6] || 'Comparación exploratoria de un participante de la campaña histórica.')}${pair && findCurrent(pair[1]).id !== current.id ? '<br><strong>Seleccionaste otro candidato: la hipótesis anterior corresponde al propuesto en el once.</strong>' : ''}`;
+    $('role-note').innerHTML = `<strong>${esc(pair?.[5] || window.FootballI18n.position(old.position))} · hipótesis por función</strong><br>${esc(pair?.[6] || 'Comparación exploratoria de un participante de la campaña histórica.')}${pair && findCurrent(pair[1]).id !== current.id ? '<br><strong>Seleccionaste otro candidato: la hipótesis anterior corresponde al propuesto en el once.</strong>' : ''}`;
     $('comparison-head').innerHTML = `<div class="comparison-names"><div class="old"><h3>${esc(old.name)}</h3><small>Arsenal · 2003/04 · ${fmt(old.stats.minutes)} min</small></div><div class="new"><h3>${esc(current.name)}</h3><small>${esc(modern?.team || 'Sin datos de esa ventana')} · 2025/26 · ${fmt(modern?.stats.minutes)} min</small><br><small>Actual: Arsenal · ${fmt(current.current_minutes)} min en 2026/27</small></div></div>`;
     const similarity=window.profileSimilarity(old,modern);
     const percent=n=>n===null?'—':n+'%';
@@ -98,7 +98,8 @@
     }).join('');
     $('historical-details').innerHTML = '<p class="small-note">Tenemos estas acciones en los videos reconstruidos de 2003/04. Nuestra fuente moderna no las ofrece por separado: falta información, no significa que el jugador actual no las haga. Por eso quedan fuera del porcentaje.</p><div class="extra-stats">'+[['passes','Pases'],['progressive_passes','Pases con avance ≥12'],['dribbles','Regates completos'],['carries','Conducciones'],['pressures','Presiones'],['interceptions','Intercepciones']].map(([k,l])=>`<div>${l}${per90?'/90':''}<strong>${fmt(rate(old,k,per90),per90?2:0)}</strong></div>`).join('')+'</div><p class="small-note">Sólo histórico; faltantes modernos, no ceros. La progresión usa una definición propia. No permite confirmar el parecido de roles.</p>';
     const a=rate(old,'goals',true),b=rate(modern,'goals',true);
-    $('comparison-takeaway').innerHTML = b===null ? 'No hay una temporada 2025/26 con minutos suficientes en el archivo para este jugador. Se conserva su lugar en el plantel actual sin inventar un perfil.' : `<strong>Diferencia de producción:</strong> ${esc(current.name)} registra ${fmt(b-a,2)} goles/90 respecto de ${esc(old.name)}. Esto no mide calidad ni similitud táctica.${modern.stats.minutes<900?' <strong>Muestra menor a 900 minutos: interpretar con cautela.</strong>':''}${modern.team!=='Arsenal'?' La producción moderna corresponde a '+esc(modern.team)+', no al Arsenal.':''}`;
+    $('comparison-takeaway').innerHTML = b===null ? 'No hay una temporada 2025/26 con minutos suficientes en el archivo para este jugador. Se conserva su lugar en el plantel actual sin inventar un perfil.' : `<strong>Diferencia de producción:</strong> <span>${esc(current.name)} registra ${fmt(b-a,2)} goles/90 respecto de ${esc(old.name)}. Esto no mide calidad ni similitud táctica.</span>${modern.stats.minutes<900?' <strong>Muestra menor a 900 minutos: interpretar con cautela.</strong>':''}${modern.team!=='Arsenal'?' <span>La producción moderna corresponde a '+esc(modern.team)+', no al Arsenal.</span>':''}`;
+    window.FootballI18n.apply();
   }
   $('historical-select').addEventListener('change',()=>{populateCurrent();renderCompare();});
   $('current-select').addEventListener('change', renderCompare);
@@ -114,7 +115,7 @@
         const past=modernById.get(p.past_id);
         return `<tr><td><button class="table-link" data-current="${esc(p.id)}">${esc(p.name)}</button><small>${esc(p.full_name)}</small></td><td>${esc(p.role)}</td><td>${esc(past?.team || 'Sin muestra')}</td><td>${fmt(past?.stats.minutes)}</td><td>${fmt(past?.stats.goals)}</td><td>${fmt(past?.stats.xg,2)}</td><td>${fmt(p.current_minutes)}</td></tr>`;
       }
-      return `<tr><td><strong>${esc(p.name)}</strong></td><td>${esc(p.position)}</td><td>${fmt(p.stats.minutes)}</td><td>${fmt(p.stats.starts)}</td><td>${fmt(p.stats.goals)}</td><td>${fmt(p.stats.xg,2)}</td><td>${fmt(p.stats.assists)}${kind==='champions'?' <small>fantasy</small>':''}</td></tr>`;
+      return `<tr><td><strong>${esc(p.name)}</strong></td><td>${esc(window.FootballI18n.position(p.position))}</td><td>${fmt(p.stats.minutes)}</td><td>${fmt(p.stats.starts)}</td><td>${fmt(p.stats.goals)}</td><td>${fmt(p.stats.xg,2)}</td><td>${fmt(p.stats.assists)}${kind==='champions'?' <small>fantasy</small>':''}</td></tr>`;
     }).join('')||'<tr><td colspan="7">No hay jugadores para estos filtros.</td></tr>';
     document.querySelectorAll('[data-current]').forEach(b=>b.addEventListener('click',()=>{const current=D.current.find(p=>p.id===b.dataset.current);
       const old=D.historical.find(p=>p.id===$('historical-select').value);
@@ -124,6 +125,7 @@
         $('historical-select').value=reference.id;
       }
       populateCurrent(current.id);renderCompare();tab('compare');}));
+    window.FootballI18n.apply();
   }
   ['squad-season','squad-group'].forEach(id=>$(id).addEventListener('change',renderSquads));
   $('squad-search').addEventListener('input',renderSquads);
@@ -139,7 +141,8 @@
       const block=similarity[key];
       return `<td class="${key==='overall'?'score-cell':''}"><strong class="score-pill ${block.score===null?'unavailable':''}" title="${esc(block.reason||block.used+' de '+block.total+' indicadores con señal')}">${block.score===null?'—':block.score+'%'}</strong><small>${block.score===null?'No evaluable':block.used+'/'+block.total+' indicadores'}</small></td>`;
     };
-    $('recruit-body').innerHTML=rows.map(({player:p,similarity:s})=>`<tr data-candidate="${esc(p.id)}" data-score="${s.overall.score??''}"><td><strong>${esc(p.name)}</strong><small>${esc(p.position)}</small></td>${['overall','offensive','defensive'].map(k=>cell(s,k)).join('')}<td>${esc(p.team)}</td><td>${esc(p.current_team_fpl||'Sin confirmar')}</td><td>${fmt(p.stats.minutes)}</td>${['goals','xg','xa','recoveries','tackles','cbi','saves','goals_conceded','clean_sheets'].map(k=>`<td>${fmt(rate(p,k,true),2)}</td>`).join('')}</tr>`).join('')||'<tr><td colspan="16">Sin candidatos para estos filtros.</td></tr>';
+    $('recruit-body').innerHTML=rows.map(({player:p,similarity:s})=>`<tr data-candidate="${esc(p.id)}" data-score="${s.overall.score??''}"><td><strong>${esc(p.name)}</strong><small>${esc(window.FootballI18n.position(p.position))}</small></td>${['overall','offensive','defensive'].map(k=>cell(s,k)).join('')}<td>${esc(p.team)}</td><td>${esc(p.current_team_fpl||'Sin confirmar')}</td><td>${fmt(p.stats.minutes)}</td>${['goals','xg','xa','recoveries','tackles','cbi','saves','goals_conceded','clean_sheets'].map(k=>`<td>${fmt(rate(p,k,true),2)}</td>`).join('')}</tr>`).join('')||'<tr><td colspan="16">Sin candidatos para estos filtros.</td></tr>';
+    window.FootballI18n.apply();
   }
   $('recruit-reference').addEventListener('change',renderRecruit);
   ['min-minutes','recruit-sort'].forEach(id=>$(id).addEventListener('change',renderRecruit));
@@ -153,8 +156,10 @@
       const id=m.id?'sb-'+m.id:'pl-'+m.date;
       return `<article class="match-card match-${result}"><header><span>${esc(m.date)}</span><span>ARSENAL ${m.home?'LOCAL':'VISITANTE'}</span></header><h3 class="fixture-name"><span class="team-label">${badge(home)}<span>${esc(home)}</span></span><span class="fixture-separator">—</span><span class="team-label away"><span>${esc(away)}</span>${badge(away)}</span></h3><div class="score ${result}">${hs} <span aria-hidden="true">—</span> ${as}</div><div class="match-card-bottom"><small class="${result}">${result==='win'?'Victoria':result==='loss'?'Derrota':'Empate'}</small><a class="match-detail-link" href="match.html?id=${encodeURIComponent(id)}">Detalles del partido ↗</a></div></article>`;
     }).join('')||'<p>No hay partidos con este resultado.</p>';
+    window.FootballI18n.apply();
   }
   ['match-season','match-result'].forEach(id=>$(id).addEventListener('change',renderMatches));
+  document.addEventListener('languagechange',()=>{renderCompare();renderSquads();renderRecruit();renderMatches();});
   selectPair(10);renderSquads();$('recruit-reference').value=findOld('Thierry Henry').id;renderRecruit();
   const params=new URLSearchParams(location.search);
   if(params.get('season') in D.fixtures)$('match-season').value=params.get('season');
