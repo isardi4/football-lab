@@ -35,20 +35,32 @@
   document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
   $('team-summary').innerHTML = Object.entries(D.teams).map(([season,t]) => `<div class="season-summary"><div class="season-name">${season}<small>${season === '2003/04' ? 'INVENCIBLES' : 'CAMPEONES'}</small></div>${[['points','Puntos'],['gf','Goles'],['ga','Recibidos'],['losses','Derrotas']].map(([k,l])=>`<div class="stat"><strong>${t[k]}</strong><small>${l}</small></div>`).join('')}</div>`).join('');
   $('historical-select').innerHTML = D.historical.map(option).join('');
-  $('current-select').innerHTML = D.current.map(option).join('');
+  function populateCurrent(preferred) {
+    const old=D.historical.find(p=>p.id===$('historical-select').value);
+    const candidates=D.current.filter(p=>window.compatiblePosition(old,p));
+    const previous=preferred||$('current-select').value;
+    $('current-select').innerHTML=candidates.map(option).join('');
+    const pair=pairs.find(p=>p[0]===old.name);
+    const suggested=pair&&findCurrent(pair[1]).id;
+    $('current-select').value=candidates.some(p=>p.id===previous)?previous:(suggested||candidates[0]?.id||'');
+  }
+  const measuredCurrent=p=> {
+    const profile=modernById.get(p.past_id);
+    return profile?{...profile,role:p.role}:undefined;
+  };
   $('recruit-reference').innerHTML = pairs.map(p => option(findOld(p[0]))).join('');
   $('pitch').innerHTML = '<div class="pitch-center"></div>' + pairs.map((p,i) => `<button class="pitch-player" data-pair="${i}" style="left:${p[3]}%;top:${p[4]}%" aria-pressed="false" aria-label="Comparar ${esc(p[0])} con ${esc(findCurrent(p[1]).name)}"><span class="shirt">${p[2]}</span><strong>${esc(short(findOld(p[0])))}</strong><small>${esc(findCurrent(p[1]).name)}</small></button>`).join('');
   document.querySelectorAll('[data-pair]').forEach(b => b.addEventListener('click', () => selectPair(Number(b.dataset.pair))));
   function selectPair(i) {
     const p = pairs[i];
     $('historical-select').value = findOld(p[0]).id;
-    $('current-select').value = findCurrent(p[1]).id;
+    populateCurrent(findCurrent(p[1]).id);
     renderCompare();
   }
   function renderCompare() {
     const old = D.historical.find(p=>p.id === $('historical-select').value);
     const current = D.current.find(p=>p.id === $('current-select').value);
-    const modern = modernById.get(current.past_id);
+    const modern = measuredCurrent(current);
     const pairIndex = pairs.findIndex(p => p[0] === old.name);
     const pair = pairs[pairIndex];
     document.querySelectorAll('[data-pair]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.pair) === pairIndex)));
@@ -59,7 +71,7 @@
     document.querySelectorAll('[data-pair]').forEach(button=>{
       const candidatePair=pairs[Number(button.dataset.pair)];
       const candidateCurrent=findCurrent(candidatePair[1]);
-      const value=window.profileSimilarity(findOld(candidatePair[0]),modernById.get(candidateCurrent.past_id));
+      const value=window.profileSimilarity(findOld(candidatePair[0]),measuredCurrent(candidateCurrent));
       let badge=button.querySelector('.pitch-score');
       if(!badge){badge=document.createElement('span');badge.className='pitch-score';button.appendChild(badge);}
       badge.textContent=value.overall.score===null?'Sin %':value.overall.score+'%';
@@ -69,7 +81,7 @@
     $('similarity').innerHTML='<div class="score-grid">'+scoreCards.map(([key,label])=>{
       const block=similarity[key];
       return `<div class="score-compact" data-dimension="${key}" title="${esc(block.reason||block.used+' indicadores con señal')}"><span>${label}</span><output aria-label="Similitud ${label}">${percent(block.score)}</output><small>${block.score===null?'No evaluable':block.used+' / '+block.total+' indicadores'}</small></div>`;
-    }).join('')+'</div><details class="score-method"><summary>Indicadores y pesos de esta comparación</summary><p>Overall: '+fmt(similarity.weights.offensive*100)+'% ofensivo + '+fmt(similarity.weights.defensive*100)+'% defensivo, según la función original. Ofensivo: goles, xG y xA por 90. Defensivo: recuperaciones, tackles y despejes + bloqueos + intercepciones por 90; para arqueros, atajadas, goles recibidos y vallas invictas.</p><p>Cada indicador compara menor ÷ mayor × 100. El bloque promedia sus indicadores con señal. Ceros compartidos se excluyen; hacen falta dos indicadores presentes y 900 minutos en ambas ventanas. Un bloque requerido faltante deja Overall sin porcentaje.</p><p>Es afinidad estadística exploratoria, no calidad ni probabilidad de encaje. xG/xA y acciones defensivas tienen modelos o criterios distintos entre proveedores; el agregado defensivo histórico es una aproximación. Asistencias fantasy, FM y acciones sin datos modernos quedan fuera.</p>'+scoreCards.slice(1).map(([key,label])=>{
+    }).join('')+'</div><details class="score-method"><summary>Indicadores y pesos de esta comparación</summary><p>Overall: '+fmt(similarity.weights.offensive*100)+'% ofensivo + '+fmt(similarity.weights.defensive*100)+'% defensivo, según la función original. Ofensivo: goles, xG y xA por 90. Defensivo: recuperaciones, tackles y despejes + bloqueos + intercepciones por 90; para arqueros, atajadas, goles recibidos y vallas invictas.</p><p>Cada indicador compara menor ÷ mayor × 100. El bloque promedia sus indicadores con señal. Ceros compartidos se excluyen; hacen falta dos indicadores presentes y 900 minutos en ambas ventanas. Un bloque requerido faltante deja Overall sin porcentaje.</p><p>Es afinidad estadística exploratoria, no calidad ni probabilidad de encaje. xG/xA y acciones defensivas tienen modelos o criterios distintos entre proveedores; el agregado defensivo histórico es una aproximación. Asistencias fantasy y acciones sin datos modernos quedan fuera.</p>'+scoreCards.slice(1).map(([key,label])=>{
       const block=similarity[key];
       return '<div class="score-breakdown"><strong>'+label+'</strong>'+(block.reason?'<p>'+esc(block.reason)+'</p>':'')+(block.components||[]).map(c=>'<div><span>'+esc(c.label)+'</span><b>'+percent(c.score)+'</b><small>'+esc(c.reason||'Comparación entre fuentes')+'</small></div>').join('')+'</div>';
     }).join('')+'</details>';
@@ -88,7 +100,7 @@
     const a=rate(old,'goals',true),b=rate(modern,'goals',true);
     $('comparison-takeaway').innerHTML = b===null ? 'No hay una temporada 2025/26 con minutos suficientes en el archivo para este jugador. Se conserva su lugar en el plantel actual sin inventar un perfil.' : `<strong>Diferencia de producción:</strong> ${esc(current.name)} registra ${fmt(b-a,2)} goles/90 respecto de ${esc(old.name)}. Esto no mide calidad ni similitud táctica.${modern.stats.minutes<900?' <strong>Muestra menor a 900 minutos: interpretar con cautela.</strong>':''}${modern.team!=='Arsenal'?' La producción moderna corresponde a '+esc(modern.team)+', no al Arsenal.':''}`;
   }
-  $('historical-select').addEventListener('change', renderCompare);
+  $('historical-select').addEventListener('change',()=>{populateCurrent();renderCompare();});
   $('current-select').addEventListener('change', renderCompare);
   $('per90').addEventListener('change', renderCompare);
   function renderSquads() {
@@ -104,30 +116,33 @@
       }
       return `<tr><td><strong>${esc(p.name)}</strong></td><td>${esc(p.position)}</td><td>${fmt(p.stats.minutes)}</td><td>${fmt(p.stats.starts)}</td><td>${fmt(p.stats.goals)}</td><td>${fmt(p.stats.xg,2)}</td><td>${fmt(p.stats.assists)}${kind==='champions'?' <small>fantasy</small>':''}</td></tr>`;
     }).join('')||'<tr><td colspan="7">No hay jugadores para estos filtros.</td></tr>';
-    document.querySelectorAll('[data-current]').forEach(b=>b.addEventListener('click',()=>{$('current-select').value=b.dataset.current;renderCompare();tab('compare');}));
+    document.querySelectorAll('[data-current]').forEach(b=>b.addEventListener('click',()=>{const current=D.current.find(p=>p.id===b.dataset.current);
+      const old=D.historical.find(p=>p.id===$('historical-select').value);
+      if(!window.compatiblePosition(old,current)){
+        const pair=pairs.find(p=>findCurrent(p[1]).id===current.id);
+        const reference=pair?findOld(pair[0]):D.historical.find(p=>window.compatiblePosition(p,current));
+        $('historical-select').value=reference.id;
+      }
+      populateCurrent(current.id);renderCompare();tab('compare');}));
   }
   ['squad-season','squad-group'].forEach(id=>$(id).addEventListener('change',renderSquads));
   $('squad-search').addEventListener('input',renderSquads);
   function renderRecruit() {
     const old=D.historical.find(p=>p.id===$('recruit-reference').value),sort=$('recruit-sort').value;
-    const candidates=D.external.filter(p=>p.group===$('recruit-group').value&&p.stats.minutes>=Number($('min-minutes').value));
+    const candidates=D.external.filter(p=>window.compatiblePosition(old,p)&&p.stats.minutes>=Number($('min-minutes').value));
     let rows;
     if(['overall','offensive','defensive'].includes(sort)) rows=window.rankCandidates(old,candidates,sort);
     else rows=candidates.map(player=>({player,similarity:window.profileSimilarity(old,player)})).sort((a,b)=>sort==='minutes'?b.player.stats.minutes-a.player.stats.minutes:(rate(b.player,sort,true)??-Infinity)-(rate(a.player,sort,true)??-Infinity)).slice(0,7);
     const weights=window.profileSimilarity(old,candidates[0]).weights;
-    $('recruit-note').innerHTML=`<strong>Siete candidatos como máximo respecto de ${esc(old.name)}.</strong> Overall: ${fmt(weights.offensive*100)}% ofensivo + ${fmt(weights.defensive*100)}% defensivo. Orden: ${esc({overall:'mayor Overall',offensive:'mayor afinidad ofensiva',defensive:'mayor afinidad defensiva',minutes:'más minutos',xg:'mayor xG/90',xa:'mayor xA/90',tackles:'más tackles/90'}[sort])}. Índices exploratorios sobre indicadores disponibles; no miden calidad ni viabilidad de fichaje.${old.group!==$('recruit-group').value?' La categoría elegida difiere de la histórica: revisá la función.':''}`;
+    $('recruit-note').innerHTML=`<strong>Siete candidatos como máximo respecto de ${esc(old.name)}.</strong> Overall: ${fmt(weights.offensive*100)}% ofensivo + ${fmt(weights.defensive*100)}% defensivo. Orden: ${esc({overall:'mayor Overall',offensive:'mayor afinidad ofensiva',defensive:'mayor afinidad defensiva',minutes:'más minutos',xg:'mayor xG/90',xa:'mayor xA/90',tackles:'más tackles/90'}[sort])}. Índices exploratorios sobre indicadores disponibles; no miden calidad ni viabilidad de fichaje. Solo candidatos del mismo grupo de posición: ${esc(old.group)}.`;
     const cell=(similarity,key)=>{
       const block=similarity[key];
       return `<td class="${key==='overall'?'score-cell':''}"><strong class="score-pill ${block.score===null?'unavailable':''}" title="${esc(block.reason||block.used+' de '+block.total+' indicadores con señal')}">${block.score===null?'—':block.score+'%'}</strong><small>${block.score===null?'No evaluable':block.used+'/'+block.total+' indicadores'}</small></td>`;
     };
     $('recruit-body').innerHTML=rows.map(({player:p,similarity:s})=>`<tr data-candidate="${esc(p.id)}" data-score="${s.overall.score??''}"><td><strong>${esc(p.name)}</strong><small>${esc(p.position)}</small></td>${['overall','offensive','defensive'].map(k=>cell(s,k)).join('')}<td>${esc(p.team)}</td><td>${esc(p.current_team_fpl||'Sin confirmar')}</td><td>${fmt(p.stats.minutes)}</td>${['goals','xg','xa','recoveries','tackles','cbi','saves','goals_conceded','clean_sheets'].map(k=>`<td>${fmt(rate(p,k,true),2)}</td>`).join('')}</tr>`).join('')||'<tr><td colspan="16">Sin candidatos para estos filtros.</td></tr>';
   }
-  $('recruit-reference').addEventListener('change',()=>{
-    const old=D.historical.find(p=>p.id===$('recruit-reference').value);
-    $('recruit-group').value=old.group;
-    renderRecruit();
-  });
-  ['recruit-group','min-minutes','recruit-sort'].forEach(id=>$(id).addEventListener('change',renderRecruit));
+  $('recruit-reference').addEventListener('change',renderRecruit);
+  ['min-minutes','recruit-sort'].forEach(id=>$(id).addEventListener('change',renderRecruit));
   function renderMatches() {
     const filter=$('match-result').value;
     const badge=team=>`<img class="team-crest" src="${esc(window.MATCH_DATA.crests[team])}" alt="" width="18" height="18">`;
@@ -140,7 +155,6 @@
     }).join('')||'<p>No hay partidos con este resultado.</p>';
   }
   ['match-season','match-result'].forEach(id=>$(id).addEventListener('change',renderMatches));
-  $('fm-attributes').innerHTML=Object.entries(D.fm.attributes).map(([name,n])=>`<div class="fm-attr"><span>${esc(name)}</span><div class="bar-track"><div class="bar" style="width:${n/99*100}%"></div></div><strong>${n}</strong></div>`).join('')+'<p class="small-note">Rice · muestra FM26. No participa en un score de similitud ni reemplaza métricas faltantes.</p>';
   selectPair(10);renderSquads();$('recruit-reference').value=findOld('Thierry Henry').id;renderRecruit();
   const params=new URLSearchParams(location.search);
   if(params.get('season') in D.fixtures)$('match-season').value=params.get('season');

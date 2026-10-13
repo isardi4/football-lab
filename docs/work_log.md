@@ -31,3 +31,8 @@ Se implementó profile_v2: xA se suma al ataque; recuperaciones, tackles y CBI a
 Tarjetas rellenas de verde pastel, rojo pastel y amarillo pastel según el resultado del Arsenal. Nombres y marcador ordenados local–visitante, con dos escudos discretos. Se reemplazaron los enlaces al JSON por fichas HTML para los 76 partidos. Se añadió resumen de estadísticas, alineaciones y cronología histórica; los faltantes modernos quedan explícitos. Se verificó que todos los goles de las cronologías, incluidos los goles en contra, reconcilien con el marcador y que cada fixture tenga ficha y escudos válidos. La navegación de vuelta conserva la temporada y la pestaña Partidos.
 
 La revisión de las fichas detectó intervalos abiertos después de expulsiones. Se corrigieron los minutos en la generación histórica y las fichas, con pruebas para Campbell (24,4 minutos) y Li en el primer partido. Se regeneraron los agregados; cualquier índice afectado se recalcula con la exposición corregida.
+
+
+## 2026-10-13 · Posiciones compatibles y retiro de Football Manager
+
+Se retiró la sección Football Manager y su muestra de los datos descargables y del generador. Comparar limita el selector a grupos compatibles; el buscador de refuerzos fija automáticamente el grupo original y conserva hasta siete resultados. El modelo también rechaza grupos incompatibles. Se conserva la hipótesis editorial Bergkamp–mediapunta del once actual. Entrar desde Plantel elige un referente compatible. Validación: pruebas del modelo, doce pruebas de datos y navegación en navegador.

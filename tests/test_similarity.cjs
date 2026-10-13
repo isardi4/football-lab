@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const{profileSimilarity:score,rankCandidates}=require('../docs/similarity.js');
+const{profileSimilarity:score,rankCandidates,compatiblePosition}=require('../docs/similarity.js');
 const stats={minutes:900,goals:10,xg:8,xa:6,recoveries:50,tackles:20,cbi:40,saves:100,goals_conceded:20};
 const p=(overrides={},group='FWD',name='Player')=>({group,name,stats:{...stats,...overrides}});
 let result=score(p(),p());
@@ -22,6 +22,13 @@ assert.equal(score(p(zero),p(zero)).overall.score,null);
 assert.equal(score(p(),p(zero)).overall.score,0);
 result=score(p({goals:0}),p({goals:0}));assert.equal(result.offensive.used,2);assert.equal(result.offensive.score,100);
 assert.equal(score(p(),p({goals:-1,xg:null})).offensive.score,null);
+for(const group of ['DEF','MID','GK']){
+ assert.equal(compatiblePosition(p(),p({},group)),false);
+ assert.equal(score(p(),p({},group)).overall.score,null);
+ assert.equal(rankCandidates(p(),[p({},group)]).length,0);
+}
+assert.equal(compatiblePosition(p({},'FWD','Dennis Bergkamp'),{...p({},'MID'),role:'AM'}),true);
+assert.equal(compatiblePosition(p({},'FWD','Thierry Henry'),{...p({},'MID'),role:'AM'}),false);
 const candidates=Array.from({length:12},(_,i)=>p({goals:10+i,xg:8+i,xa:6+i},'FWD','Candidate '+i));
 const ranked=rankCandidates(p(),candidates);
 assert.equal(ranked.length,7);assert.equal(ranked[0].player.name,'Candidate 0');

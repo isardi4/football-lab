@@ -12,7 +12,6 @@ Página estática en `docs/`, publicada con GitHub Pages. Sin servidor, credenci
 - FPL: agregados históricos 2025/26 desde el archivo público de vaastav, contrastados con cinco respuestas oficiales; snapshot 2026/27 para afiliaciones actuales.
 - Football-Data.co.uk: 38 resultados del Arsenal en 2025/26.
 - Premier League: listas oficiales para separar plantel actual, cedidos y registros históricos.
-- Football Manager: muestra pública FM26 de Rice y enlaces de procedencia. Sin integración completa; atributos separados de estadísticas reales.
 
 Hay diferencias de definición entre fuentes; ver [diccionario](docs/data_dictionary.md). Las parejas del once son hipótesis editoriales. El buscador de refuerzos ordena producción por una métrica explícita; no estima precios ni probabilidad de éxito de un fichaje.
 

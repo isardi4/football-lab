@@ -21,11 +21,17 @@
     const value=reason?null:used.reduce((sum,c)=>sum+c.value,0)/used.length;
     return{components,used:used.length,total:specs.length,score:value===null?null:Math.round(value),value,reason};
   }
+  // Only a documented second-striker / attacking-midfield hypothesis crosses groups.
+  function compatiblePosition(original,candidate){
+    if(!original||!candidate)return false;
+    return original.group===candidate.group ||
+      (original.name==='Dennis Bergkamp' && candidate.role==='AM');
+  }
   function profileSimilarity(historical,modern){
     const weights=ROLE_WEIGHTS[historical?.group]||ROLE_WEIGHTS.MID;
     let reason=null;
     if(!historical||!modern)reason='Falta el perfil de una de las temporadas.';
-    else if((historical.group==='GK')!==(modern.group==='GK'))reason='Un arquero y un jugador de campo no comparten el perfil de comparación.';
+    else if(!compatiblePosition(historical,modern))reason='Los jugadores no comparten un grupo de posición compatible.';
     else if(![historical,modern].every(p=>Number.isFinite(p.stats?.minutes)&&p.stats.minutes>=900))reason='Se requieren al menos 900 minutos en cada temporada.';
     if(reason)return{overall:noScore(reason),offensive:noScore(reason),defensive:noScore(reason),weights,version:'profile_v2'};
     const offensive=historical.group==='GK'?noScore('La fuente moderna no aporta distribución ofensiva comparable del arquero.'):category(historical,modern,attack);
@@ -37,11 +43,12 @@
   }
   function rankCandidates(original,candidates,dimension='overall'){
     if(!['overall','offensive','defensive'].includes(dimension))throw new Error('Unknown similarity dimension');
-    return candidates.map(player=>({player,similarity:profileSimilarity(original,player)}))
+    return candidates.filter(player=>compatiblePosition(original,player)).map(player=>({player,similarity:profileSimilarity(original,player)}))
       .sort((a,b)=>(b.similarity[dimension].value??-1)-(a.similarity[dimension].value??-1)||b.player.stats.minutes-a.player.stats.minutes||a.player.name.localeCompare(b.player.name))
       .slice(0,7);
   }
+  root.compatiblePosition=compatiblePosition;
   root.profileSimilarity=profileSimilarity;
   root.rankCandidates=rankCandidates;
-  if(typeof module!=='undefined'&&module.exports)module.exports={profileSimilarity,rankCandidates};
+  if(typeof module!=='undefined'&&module.exports)module.exports={profileSimilarity,rankCandidates,compatiblePosition};
 })(typeof window==='undefined'?globalThis:window);

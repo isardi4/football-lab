@@ -198,10 +198,6 @@ def main():
                'current': current_roster, 'external': [p for p in modern if p['code'] not in current_codes and p['team']!='Arsenal' and (p['stats']['minutes'] or 0)>=900],
                'modern': modern, 'fixtures': {'2003/04': old_matches, '2025/26': new_matches},
                'teams': {'2003/04': summary(old_matches), '2025/26': summary(new_matches)},
-               'fm': {'player': 'Rice', 'edition':'FM26', 'scale':'0–99 · normalizada por FMInside',
-                      'status':'Muestra pública consultada; integración completa pendiente',
-                      'url':'https://fminside.net/players/7-fm-26/28106491-declan-rice',
-                      'attributes':{'Passing':75,'Tackling':85,'Vision':70,'Decisions':90,'Anticipation':90,'Work Rate':85,'Stamina':85,'Acceleration':65}},
                'provenance': [{'file':str(p.relative_to(CACHE)), 'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(CACHE.rglob('*')) if p.is_file()]}
     OUT.mkdir(exist_ok=True)
     (OUT/'arsenal-data.json').write_text(json.dumps(dataset, ensure_ascii=False, indent=2)+'\n')

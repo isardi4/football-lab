@@ -30,20 +30,19 @@ Fecha: 2026-10-13. Análisis independiente con fines de aprendizaje y portfolio.
 | `saves` histórico | Goal Keeper type Shot Saved, Penalty Saved o Shot Saved to Post; clasificación a revisar antes de usar para selección de arqueros |
 | `external` | Jugadores con ≥900 minutos 2025/26 fuera del snapshot Arsenal de esa temporada y del plantel actual seleccionado |
 | `current_team_fpl` | Afiliación actual reportada por FPL; pendiente de verificación oficial para recomendaciones de fichaje |
-| `fm` | Muestra pública de ocho atributos de Rice FM26 publicada por FMInside; escala normalizada 0–99. No entra en cálculos de similitud |
 | `provenance` | SHA-256 de los archivos locales utilizados, para auditar snapshots |
 
 Los faltantes son `null`; los ceros observados permanecen cero. Per-90: `total * 90 / minutes`; con cero minutos, no se calcula. Overall, Ofensivo y Defensivo son afinidades exploratorias de métricas disponibles. No hay corrección por liga/época ni estimación de costo de contratación.
 
-StatsBomb Open Data y FPL no son mediciones idénticas. Las parejas propuestas en el once son hipótesis editoriales, no conclusiones estadísticas. El buscador de refuerzos compara una dimensión explícita de producción, no el encaje táctico completo. Datos de FM son evaluaciones del juego; no certifican salarios, contratos ni rendimiento real.
+StatsBomb Open Data y FPL no son mediciones idénticas. Las parejas propuestas en el once son hipótesis editoriales, no conclusiones estadísticas. El buscador de refuerzos compara una dimensión explícita de producción, no el encaje táctico completo.
 
-Fuentes: [StatsBomb Open Data](https://github.com/hudl/open-data), [FPL](https://fantasy.premierleague.com), [archivo vaastav](https://github.com/vaastav/Fantasy-Premier-League), [Football-Data.co.uk](https://www.football-data.co.uk), [planteles oficiales](https://www.premierleague.com/en/news/4706139/see-all-the-202627-premier-league-squad-lists), [FMInside](https://fminside.net/players/7-fm-26/28106491-declan-rice).
+Fuentes: [StatsBomb Open Data](https://github.com/hudl/open-data), [FPL](https://fantasy.premierleague.com), [archivo vaastav](https://github.com/vaastav/Fantasy-Premier-League), [Football-Data.co.uk](https://www.football-data.co.uk), [planteles oficiales](https://www.premierleague.com/en/news/4706139/see-all-the-202627-premier-league-squad-lists).
 
 Los JSON de eventos, alineaciones y dumps originales permanecen en cache local ignorado. La web contiene agregados calculados y procedencia. La atribución y el logo StatsBomb aparecen en la página.
 
 ## Modelo anterior: offensive_v1 (reemplazado por profile_v2)
 
-La comparación muestra similitud de producción ofensiva, no de estilo global: `100 × min(a,b)/max(a,b)` para goles/90 y xG/90; media de dimensiones con igual peso. Ceros compartidos no aportan señal y no se incluyen. Requiere ambas métricas disponibles, valores no negativos, al menos 900 minutos en cada ventana y jugadores de categorías MID/FWD. Para arqueros/defensores queda no evaluable: estas métricas no describen su función. El xG de ambas fuentes tiene modelos distintos, por lo que este índice es orientativo y no validado como medida táctica. No incluye defensa, asistencias fantasy, FM ni métricas históricas sin equivalente moderno. Es independiente del interruptor de totales/per-90.
+La comparación muestra similitud de producción ofensiva, no de estilo global: `100 × min(a,b)/max(a,b)` para goles/90 y xG/90; media de dimensiones con igual peso. Ceros compartidos no aportan señal y no se incluyen. Requiere ambas métricas disponibles, valores no negativos, al menos 900 minutos en cada ventana y jugadores de categorías MID/FWD. Para arqueros/defensores queda no evaluable: estas métricas no describen su función. El xG de ambas fuentes tiene modelos distintos, por lo que este índice es orientativo y no validado como medida táctica. No incluye defensa, asistencias fantasy ni métricas históricas sin equivalente moderno. Es independiente del interruptor de totales/per-90.
 
 El mismo offensive_v1 se usa en Comparar y Refuerzos. El orden predeterminado de refuerzos es porcentaje descendente, con desempate por minutos descendentes y nombre; los no evaluables quedan al final. La ficha superior destaca la mejor coincidencia ofensiva de los filtros activos, incluso si se ordena la tabla por otra estadística. Al cambiar referente se selecciona su grupo amplio, editable por el usuario.
 
@@ -59,7 +58,7 @@ A pedido del usuario, se compara ofensiva y defensa y se muestran hasta siete ca
 - **Overall:** según grupo original, FWD 70% ofensivo / 30% defensivo, MID 50% / 50%, DEF 30% / 70%, GK 0% / 100%. Son pesos editoriales, no aprendidos. Sin un bloque requerido, no hay Overall; no se redistribuyen sus pesos.
 - **Orden:** por valor sin redondear de la dimensión elegida, con desempate por minutos y nombre. La visualización redondea a entero. Top siete, o menos si los filtros devuelven menos.
 
-Una fuente distinta puede cambiar conteos, especialmente CBI y tackles. Los índices sirven para explorar cercanía en este conjunto de indicadores; no son una probabilidad de encaje ni una medida completa de estilo. Pases, conducción, regates, presiones y atributos FM sin contraparte histórica/moderna conservan sus faltantes. No se añade rendimiento simulado a estadísticas reales.
+Una fuente distinta puede cambiar conteos, especialmente CBI y tackles. Los índices sirven para explorar cercanía en este conjunto de indicadores; no son una probabilidad de encaje ni una medida completa de estilo. Pases, conducción, regates, presiones sin contraparte histórica/moderna conservan sus faltantes. No se añade rendimiento simulado a estadísticas reales.
 
 ## Detalles de partidos
 
@@ -72,3 +71,6 @@ Moderno: marcadores final y descanso, tiros, tiros al arco, faltas, córners, am
 Escudos: archivos oficiales actuales del servicio de imágenes de Premier League, guardados localmente. Son identificadores visuales del club, no una reconstrucción de sus versiones históricas. Procedencia y SHA-256 en `crests/sources.json`.
 
 Las posiciones históricas pueden permanecer abiertas después de una expulsión. `position_minutes` limita los intervalos a la primera Red Card/Second Yellow del jugador. Se aplica tanto a agregados como a fichas del partido; goles y conteos de acciones no cambian.
+
+
+Comparar y Refuerzos restringen candidatos al mismo grupo de posición. En el plantel actual se conserva la hipótesis explícita Bergkamp–mediapunta (rol AM); en refuerzos, sin roles finos verificados, se exige el mismo grupo FPL. Las parejas incompatibles no reciben índices. Football Manager se retiró del dashboard y de los datos descargables.
